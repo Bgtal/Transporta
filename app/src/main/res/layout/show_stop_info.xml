@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/show_stop_info_scroll"
+    android:layout_width="fill_parent"
+    android:layout_height="200dp"
+    android:layout_gravity="bottom"
+    android:alpha="0.7"
+    android:background="#ffffff"
+    android:visibility="visible" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/show_stop_info_reason"
+            android:textColor="#ff7f7f7f"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/show_history_reson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="原因"
+            android:textColor="#ff7f7f7f"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/show_stop_info_way"
+            android:textColor="#ff7f7f7f"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/show_history_way"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="走路"
+            android:textColor="#ff7f7f7f"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/show_stop_info_content"
+            android:textColor="#ff7f7f7f"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/show_history_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="content"
+            android:textColor="#ff7f7f7f"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+</ScrollView>

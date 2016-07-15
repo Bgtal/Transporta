@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edit_stop_info_btns"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="horizontal" >
+
+    <Button
+        android:id="@+id/marker_btn_cancel"
+        style="@android:attr/buttonStyleInset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="cancel"
+        android:text="@string/show_stop_info_cancle" />
+
+    <Button
+        android:id="@+id/marker_btn_delete"
+        style="@android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="delete"
+        android:text="@string/show_stop_info_delete" />
+
+    <Button
+        android:id="@+id/marker_btn_ok"
+        style="@android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="save"
+        android:text="@string/show_stop_info_ok" />
+
+</LinearLayout>

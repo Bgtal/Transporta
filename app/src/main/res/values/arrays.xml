@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="array_string_test">
+        <item>aa</item>
+        <item>aa</item>
+        <item>aa</item>
+        <item>aa</item>
+        <item>aa</item>
+        <item>aa</item>
+    </string-array>
+    <string-array name="birth_array">
+        <item>Australia</item>
+        <item>New Zealand </item>
+        <item>Cook Is</item>
+        <item>Guam</item>
+        <item>Tonga</item>
+        <item>Fiji</item>
+        <item>China</item>
+        <item>United States</item>
+        <item>United Kingdom</item>
+        <item>Japan</item>
+        <item>Canada</item>
+        <item>Korea</item>
+        <item>India</item>
+        <item>Singapore</item>
+        <item>France</item>
+        <item>Germany</item>
+        <item>Italy</item>
+        <item>Egypt</item>
+        <item>Brazil</item>
+        <item>Uruguay</item>
+        <item>Chile</item>
+        <item>Cuba</item>
+        <item>Thailand</item>
+    </string-array>
+    <string-array name="driver_array">
+        <item>No current licence</item>
+        <item>Car licence - full licence(default)</item>
+        <item>Car licence - P-plates</item>
+        <item>Car licence learner\'s permit</item>
+        <item>Motorbike licence - up to 250CC</item>
+        <item>Motorbike licence - over 250CC</item>
+    </string-array>
+    <string-array name="employment_array">
+        <item>Not currently employed(default)</item>
+        <item>Currently employed - less than 35 hours per week</item>
+        <item>Currently employed - more than 35 hours per week</item>
+    </string-array>
+    <string-array name="studying_array">
+        <item>Not studying(default)</item>
+        <item>Studying full time</item>
+        <item>Studying part time</item>
+    </string-array>
+    <string-array name="workspace_array">
+        <item>Home</item>
+        <item>Regular workplace(not home)</item>
+        <item>Multiple workplaces</item>
+    </string-array>
+    <string-array name="industry_array">
+        <item>Agriculture</item>
+        <item>Forestry</item>
+        <item>Animal Husbandry</item>
+        <item>Fisheries</item>
+        <item>Mining industry</item>
+        <item>Manufacturing</item>
+        <item>Construction</item>
+        <item>Transportation</item>
+        <item>IT</item>
+        <item>Wholesale and retail sales</item>
+        <item>Finance</item>
+        <item>Estate</item>
+        <item>Scientific investigation</item>
+        <item>Water industry</item>
+        <item>Education</item>
+        <item>Entertainment</item>
+        <item>Hotels and catering services</item>
+    </string-array>
+    <string-array name="studying_level_array">
+        <item>Pre-primary</item>
+        <item>Not in school</item>
+        <item>Primary school</item>
+        <item>Secondary school</item>
+        <item>Post-secondary school(default)</item>
+    </string-array>
+    <string-array name="other_activity_array">
+        <item>In child care</item>
+        <item>Not yet at school</item>
+        <item>Home duties(default)</item>
+        <item>Currently unemployed</item>
+        <item>Volunteer work</item>
+        <item>Retired</item>
+        <item>Aged pensioner</item>
+        <item>Other pensioner</item>
+    </string-array>
+
+</resources>
