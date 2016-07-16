@@ -62,7 +62,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 		OnMarkerClickListener, OnMapClickListener {
 
 	private Context context;
-	private GoogleMap mMap;
+//	private GoogleMap mMap;
 	private boolean isBind = false;
 	private ServiceConnection conn = new ServiceConnection() {
 
@@ -115,12 +115,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		context = this;
-		AppManager.addActivity(this);
-		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.main_map);
-		mapFragment.getMapAsync(this);
 		if (canShow()) {
 			recordUpdate();
 		}
@@ -204,22 +198,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 	@Override
 	public void onMapReady(GoogleMap map) {
-		mMap = map;
-		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-			// TODO: Consider calling
-			//    ActivityCompat#requestPermissions
-			// here to request the missing permissions, and then overriding
-			//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-			//                                          int[] grantResults)
-			// to handle the case where the user grants the permission. See the documentation
-			// for ActivityCompat#requestPermissions for more details.
-			return;
-		}
-		mMap.setMyLocationEnabled(true);
-		mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 		draw();
-		Intent serviceIntent = new Intent(this,RecordingService.class);
-		bindService(serviceIntent, conn, Context.BIND_AUTO_CREATE);
 		if(canShow()){
 			mMap.setOnMarkerClickListener(this);
 			mMap.setOnMapClickListener(this);
@@ -353,12 +332,4 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 		}
 	}
 
-	/**
-	 * 当前时间是否小于20点
-	 * @return
-	 */
-	private boolean canShow(){
-
-		return System.currentTimeMillis()>(DateConvertUtil.DateTodayLong()+20*CommonConstant.ONE_HOUR_LONG);
-	}
 }

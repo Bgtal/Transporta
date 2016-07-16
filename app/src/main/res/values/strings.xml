@@ -70,4 +70,5 @@
     <string name="nav_location">Location</string>
     <string name="nav_edit">Edit</string>
     <string name="nav_log_out">Log Out</string>
+    <string name="title_activity_test_view">Map</string>
 </resources>

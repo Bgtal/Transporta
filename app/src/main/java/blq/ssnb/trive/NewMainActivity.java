@@ -1,10 +1,14 @@
 package blq.ssnb.trive;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -21,7 +25,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
 import blq.ssnb.trive.View.MyDialog;
+import blq.ssnb.trive.app.AppManager;
 import blq.ssnb.trive.app.MyApplication;
+import blq.ssnb.trive.constant.CommonConstant;
+import blq.ssnb.trive.constant.SetConstant;
+import blq.ssnb.trive.service.RecordingService;
+import blq.ssnb.trive.util.DateConvertUtil;
 import blq.ssnb.trive.util.MLog;
 import blq.ssnb.trive.util.TUtil;
 
@@ -32,17 +41,29 @@ public class NewMainActivity extends AppCompatActivity
 
     private Context context;
     private GoogleMap googleMap;
+    private ServiceConnection conn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppManager.addActivity(this);
         context = this;
-        initView();
         initData();
+        initView();
     }
 
     private void initData() {
+        conn = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
 
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+
+            }
+        };
     }
 
     private void initView() {
@@ -55,7 +76,6 @@ public class NewMainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -117,6 +137,13 @@ public class NewMainActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
+        this.googleMap.setMapType(SetConstant.singleton().getGoogleMapType());
+        Intent serviceIntent = new Intent(this,RecordingService.class);
+        bindService(serviceIntent, conn, Context.BIND_AUTO_CREATE);
+        drawTrive();
+        if(canUpdate()){
+
+        }
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this,
@@ -129,6 +156,18 @@ public class NewMainActivity extends AppCompatActivity
             return;
         }
         this.googleMap.setMyLocationEnabled(true);
+
+    }
+
+    private boolean canUpdate() {
+
+        return System.currentTimeMillis()>(DateConvertUtil.DateTodayLong()+SetConstant.singleton().getUpdateTime()* CommonConstant.ONE_HOUR_LONG);;
+    }
+
+    /**
+     * 画图
+     */
+    private void drawTrive() {
 
     }
 

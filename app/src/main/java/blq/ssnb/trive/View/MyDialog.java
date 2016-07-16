@@ -113,6 +113,10 @@ public class MyDialog extends Dialog{
             @Override
             public void onClick(View v) {
                 dismiss();
+                if(rightBtnEvent!=null){
+                    rightBtnEvent.onClick();
+                }
+
                 choosePosition=olderChoosePosition;
             }
         });

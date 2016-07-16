@@ -26,7 +26,7 @@ public class Explain extends Activity {
 	 * @param v
 	 */
 	public void GetInto(View v){
-		Intent inte = new Intent(Explain.this,StartActivity.class);
+		Intent inte = new Intent(Explain.this,TestView.class);//StartActivity.class);
 		startActivity(inte);
 		this.finish();
 	}
