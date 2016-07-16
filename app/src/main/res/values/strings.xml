@@ -61,5 +61,13 @@
     <string name="register_fail_email_already_have">Register fail,E-mail already have</string>
     <string name="register_fail">Register fail,Please try again later</string>
     <string name="transporta">Transporta</string>
-    <string name="log_out">Log Out</string>
+
+
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="nav_history">History</string>
+    <string name="nav_location">Location</string>
+    <string name="nav_edit">Edit</string>
+    <string name="nav_log_out">Log Out</string>
 </resources>

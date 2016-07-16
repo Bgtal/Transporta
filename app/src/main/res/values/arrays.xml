@@ -93,5 +93,44 @@
         <item>Aged pensioner</item>
         <item>Other pensioner</item>
     </string-array>
+    <string-array name="reson">
+        <item>NULL</item>
+        <item>Got on or off PT</item>
+        <item>Something picked-up or delivered </item>
+        <item>Someone picked-up or delivered</item>
+        <item>Accompanied someone</item>
+        <item>Ate or drank</item>
+        <item>Bought something (including petrol)</item>
+        <item>Education</item>
+        <item>Work purposes</item>
+        <item>At home</item>
+        <item>Visited someone</item>
+        <item>Other(NEC)</item>
+        <item>Change mode (NEC)</item>
+        <item>Childcare (being cared for)</item>
+        <item>Volunteer/Community activity</item>
+        <item>Religious activity</item>
+        <item>Personal business (NEC)</item>
+        <item>Medical/Dental purposes</item>
+        <item>Stayed overnight</item>
+        <item>Socialising (Pubs, Clubs etc)</item>
+        <item>Participated in sport</item>
+        <item>Watched sport</item>
+        <item>Participated in concert,musical,band etc</item>
+        <item>Watched concert, musical, band etc</item>
+        <item>Other recreational (eg. exercise)</item>
+        <item>Browsing, window-shopping</item>
+        <item>Returned to other house</item>
+        <item>Met/waited for someone</item>
+        <item>Walked the dog</item>
+        <item>Childcare (providing)</item>
+        <item>Animal care/ feeding</item>
+        <item>Vehicle repair and maintainence</item>
+        <item>Gardening</item>
+        <item>Beauty</item>
+        <item>Financial Purposes (eg banking)</item>
+        <item>To get on aeroplane/ship (to leave region)</item>
+        <item>To be out of the region (NFD)</item>
+    </string-array>
 
 </resources>

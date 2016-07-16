@@ -100,9 +100,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 		}
 	};
 
-	private List<LatLng> lineList = new ArrayList<LatLng>();
-	private List<MarkerOptions> MarkList = new ArrayList<MarkerOptions>();
-	private List<TripPointInfo> MarkTripInfo = new ArrayList<TripPointInfo>();
+	private List<LatLng> lineList = new ArrayList<>();
+	private List<MarkerOptions> MarkList = new ArrayList<>();
+	private List<TripPointInfo> MarkTripInfo = new ArrayList<>();
 
 	private TripPointInfo selectTripInfo;
 	private ScrollView edit_scroll;

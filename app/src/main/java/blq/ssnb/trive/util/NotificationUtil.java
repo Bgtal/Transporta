@@ -39,7 +39,7 @@ public class NotificationUtil {
 			return ;
 		}*/
 
-		int icon = R.drawable.ic_launcher;
+		int icon = R.drawable.ic_launcher_2;
 		CharSequence tickerText = context.getResources().getString(R.string.notification_update);
 
 		Notification myNotify = new Notification();  

@@ -30,7 +30,7 @@
     <application
         android:name=".app.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher_2"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -76,7 +76,6 @@
             android:launchMode="singleTask" />
         <activity android:name="blq.ssnb.trive.activity.LoginActivity"/>
         <activity android:name="blq.ssnb.trive.activity.RegisterActivity"/>
-        <activity android:name="blq.ssnb.trive.activity.HomeInfoActivity" />
         <activity android:name="blq.ssnb.trive.activity.PersonalActivity" />
         <activity android:name="blq.ssnb.trive.activity.SetUpActivity" />
         <activity android:name="blq.ssnb.trive.activity.HistoryShowActivity" />
