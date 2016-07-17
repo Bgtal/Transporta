@@ -3,6 +3,7 @@ package blq.ssnb.trive.activity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -22,6 +23,7 @@ import blq.ssnb.trive.http.okhttp.OkHttpUtils;
 import blq.ssnb.trive.http.okhttp.callback.StringCallback;
 import blq.ssnb.trive.model.UserModel;
 import blq.ssnb.trive.service.RecordingService;
+import blq.ssnb.trive.util.DialogUtil;
 import blq.ssnb.trive.util.MLog;
 import blq.ssnb.trive.util.PreferenceUtil;
 import blq.ssnb.trive.util.RegularUtil;
@@ -97,7 +99,10 @@ public class LoginActivity extends BaseActivity{
 
 	}
 
+	Dialog loginDialog;
 	private void httpLogin(String email) {
+		loginDialog = DialogUtil.LoginDialog(LoginActivity.this);
+		loginDialog.show();
 		OkHttpUtils
 				.post()
 				.url(HttpConstant.LOGIN)
@@ -139,12 +144,15 @@ public class LoginActivity extends BaseActivity{
 									Intent service = new Intent(context,RecordingService.class);
 									startService(service);
 								}
+								loginDialog.dismiss();
 								startActivity(new Intent(LoginActivity.this,MainActivity.class));
 								AppManager.finishActivity(LoginActivity.class);
 							}else{
+								loginDialog.dismiss();
 								TUtil.TLong(R.string.login_fail);
 							}
 						} catch (JSONException e) {
+							loginDialog.dismiss();
 							TUtil.TLong(R.string.login_fail);
 						}
 					}

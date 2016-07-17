@@ -6,14 +6,14 @@ package blq.ssnb.trive.constant;
 public class SetConstant {
     private static SetConstant singleton;
     private int googleMapType;
-    private long updateTime;
-    private long recordStartTime;
-    private long recordStopTime;
+    private int updateTime;
+    private int recordStartTime;
+    private int recordStopTime;
     private SetConstant(){
         googleMapType = 2;
-        updateTime = 20*CommonConstant.ONE_HOUR_LONG;
-        recordStartTime = 6*CommonConstant.ONE_HOUR_LONG;
-        recordStopTime = 20*CommonConstant.ONE_HOUR_LONG;
+        updateTime = 20;
+        recordStartTime = 6;
+        recordStopTime = 20;
     }
     public static SetConstant singleton(){
         if(singleton == null){
@@ -30,11 +30,27 @@ public class SetConstant {
      * 获得可更新和停止记录的时间
      * @return
      */
-    public long getUpdateTime() {
+    public int getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(long updateTime) {
+    public void setUpdateTime(int updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public int getRecordStartTime() {
+        return recordStartTime;
+    }
+
+    public void setRecordStartTime(int recordStartTime) {
+        this.recordStartTime = recordStartTime;
+    }
+
+    public int getRecordStopTime() {
+        return recordStopTime;
+    }
+
+    public void setRecordStopTime(int recordStopTime) {
+        this.recordStopTime = recordStopTime;
     }
 }

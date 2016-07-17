@@ -46,7 +46,7 @@ public class NotificationUtil {
 		myNotify.icon = icon;  
 		myNotify.tickerText = tickerText;  
 		myNotify.when = time; 
-		myNotify.flags = Notification.FLAG_AUTO_CANCEL;//会被清除
+		myNotify.flags = Notification.FLAG_AUTO_CANCEL|Notification.FLAG_NO_CLEAR;//会被清除
 		myNotify.defaults = Notification.DEFAULT_VIBRATE;
 
 		RemoteViews remoteView = new RemoteViews(context.getPackageName(),  

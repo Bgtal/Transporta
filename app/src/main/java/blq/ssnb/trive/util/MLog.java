@@ -4,7 +4,7 @@ import android.util.Log;
 
 public class MLog {
 
-	private static int LEVEL = 6;
+	private static int LEVEL = 0;
 	private static int V = 1;
 	private static int D = 2;
 	private static int I = 3;

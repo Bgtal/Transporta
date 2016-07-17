@@ -14,6 +14,14 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:text="@string/history_list_title"/>
+    <TextView
+        android:id="@+id/no_history_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="No history record"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
     <ListView
         android:id="@+id/history_list"
         android:layout_below="@+id/ll_tv_history_title"

@@ -28,35 +28,6 @@ public class CommonConstant {
 	public static final String BOOT_COMPETED = Intent.ACTION_BOOT_COMPLETED;//开机启动广播
 	public static final String CONNECTIVITY_ACTION = ConnectivityManager.CONNECTIVITY_ACTION;//网络连接改变广播
 
-/*
-	public enum Sex{
-		WOMEN(0,R.string.women),MEN(1,R.string.men);
-		private int tag ;
-		private int string;
-		private Sex(int tag,int string) {
-			this.setTag(tag);
-			this.setString(string);
-		}
-		public int getTag() {
-			return tag;
-		}
-		private void setTag(int tag) {
-			this.tag = tag;
-		}
-		public int getString() {
-			return string;
-		}
-		private void setString(int string) {
-			this.string = string;
-		}
-		public static Sex getSexByTag(int tag){
-			if(tag==WOMEN.getTag()){
-				return WOMEN;
-			}else{
-				return MEN;
-			}
-		}
-	}*/
 
 
 	public static final String[] WAY={"NULL",

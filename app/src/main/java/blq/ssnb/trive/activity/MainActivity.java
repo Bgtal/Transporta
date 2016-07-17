@@ -60,6 +60,7 @@ import blq.ssnb.trive.service.RecordManager;
 import blq.ssnb.trive.service.RecordingService;
 import blq.ssnb.trive.util.DateConvertUtil;
 import blq.ssnb.trive.util.DialogUtil;
+import blq.ssnb.trive.util.NotificationUtil;
 import blq.ssnb.trive.util.TUtil;
 import okhttp3.Call;
 
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         AppManager.addActivity(this);
         context = this;
+        NotificationUtil.cancle(context, NotificationUtil.NotificationType.Update);
         initEvent();
         initData();
         initView();
@@ -505,7 +507,9 @@ public class MainActivity extends AppCompatActivity
         if(googleMap!=null){
             drawTravel();
             Intent serviceIntent = new Intent(context,RecordingService.class);
-            bindService(serviceIntent, conn, Context.BIND_AUTO_CREATE);
+            if(!isBind){
+                bindService(serviceIntent, conn, Context.BIND_AUTO_CREATE);
+            }
             RecordManager.getInstance().setActivityRequestCallBack(recordCallBack);
         }
     }

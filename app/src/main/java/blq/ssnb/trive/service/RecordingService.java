@@ -31,6 +31,7 @@ public class RecordingService extends Service implements OnConnectionFailedListe
 	//private static final String TAG = RecordingService.class.getSimpleName();
 
 	private static GoogleApiClient mGoogleApiClient;
+	private boolean isBind = false;
 
 	/**
 	 * GoogleApiClient 的懒加载
@@ -71,6 +72,7 @@ public class RecordingService extends Service implements OnConnectionFailedListe
 	@Override
 	public IBinder onBind(Intent intent) {
 //		WriteFileUtil.writeByNameAndContent("Service", "绑定onBind");
+		isBind = true;
 		checkGoogleApiClientConnected();
 		return new MyBind();
 	}
@@ -84,6 +86,7 @@ public class RecordingService extends Service implements OnConnectionFailedListe
 	@Override
 	public boolean onUnbind(Intent intent) {
 //		WriteFileUtil.writeByNameAndContent("Service", "解除绑定onUnbind");
+		isBind = false;
 		RecordManager.getInstance().setActivityRequestCallBack(null);
 		return super.onUnbind(intent);
 	}
@@ -111,15 +114,13 @@ public class RecordingService extends Service implements OnConnectionFailedListe
 
 	@Override
 	public void onConnected(Bundle connectionHint) {
-		TUtil.TLong(R.string.google_service_connectioned);
-		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-			// TODO: Consider calling
-			//    ActivityCompat#requestPermissions
-			// here to request the missing permissions, and then overriding
-			//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-			//                                          int[] grantResults)
-			// to handle the case where the user grants the permission. See the documentation
-			// for ActivityCompat#requestPermissions for more details.
+		if(isBind){
+			TUtil.TLong(R.string.google_service_connectioned);
+		}
+		if (ActivityCompat.checkSelfPermission(this,
+				Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+				&& ActivityCompat.checkSelfPermission(this,
+				Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 			return;
 		}
 		LocationServices.FusedLocationApi.requestLocationUpdates(
@@ -135,7 +136,7 @@ public class RecordingService extends Service implements OnConnectionFailedListe
 
 	@Override
 	public void onConnectionFailed(ConnectionResult result) {
-		if(!result.isSuccess()){
+		if(!result.isSuccess()&&isBind){
 			TUtil.TLong(R.string.google_service_connection_fail);
 		}
 	}
@@ -145,7 +146,9 @@ public class RecordingService extends Service implements OnConnectionFailedListe
 			if(!mGoogleApiClient.isConnecting()){//如果没有连接就进行连接
 				getmGoogleApiClient().connect();
 			}
-			TUtil.TShort(R.string.google_service_connectioning);
+			if(isBind){
+				TUtil.TShort(R.string.google_service_connectioning);
+			}
 		}
 	}
 	public void Clean(){

@@ -65,7 +65,7 @@ public class StartActivity extends BaseActivity {
 				if(isauto){
 					autoLogin(locationEmail);
 				}else{
-					loginActivity();
+					loginActivity(false);
 				}
 			}else{
 				//没有超时就进入主界面
@@ -73,7 +73,7 @@ public class StartActivity extends BaseActivity {
 			}
 		}else{
 			//没有就返回失败，到登录界面
-			loginActivity();
+			loginActivity(false);
 		}
 	}
 	private void autoLogin(String email) {
@@ -117,10 +117,10 @@ public class StartActivity extends BaseActivity {
 								}
 								loginSuccess();
 							}else{
-								loginActivity();
+								loginActivity(true);
 							}
 						} catch (JSONException e) {
-							loginActivity();
+							loginActivity(true);
 						}
 					}
 				});
@@ -133,8 +133,10 @@ public class StartActivity extends BaseActivity {
 		startActivity(new Intent(StartActivity.this,MainActivity.class));
 		AppManager.finishActivity(StartActivity.class);
 	}
-	private void loginActivity(){
-		TUtil.TShort(string.auto_login_fail);
+	private void loginActivity(boolean showToash){
+		if(showToash){
+			TUtil.TShort(string.auto_login_fail);
+		}
 		preference.saveBoolean(PlistConstant.AUTO_LOGIN_ISAUTO, false);
 		preference.saveLong(PlistConstant.AUTO_LOGIN_TIME, 0);
 		preference.saveString(PlistConstant.AUTO_LOGIN_EMAIL,"");

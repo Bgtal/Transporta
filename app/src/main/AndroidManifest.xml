@@ -51,7 +51,7 @@
             android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".activity.Explain"
+            android:name=".activity.StartActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -61,9 +61,9 @@
         </activity>
 
         <!-- trive activity -->
-        <activity
+        <!--<activity
             android:name=".activity.StartActivity"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"/>-->
         <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.SetUpActivity"/>
         <activity android:name=".activity.HistoryShowActivity"/>

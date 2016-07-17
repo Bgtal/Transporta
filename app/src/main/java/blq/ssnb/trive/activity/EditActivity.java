@@ -95,6 +95,8 @@ public class EditActivity extends AppCompatActivity implements
     private RadioButton day2Radio;
     private RadioButton day3Radio;
 
+    private boolean haveData = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,7 +131,6 @@ public class EditActivity extends AppCompatActivity implements
     }
 
     private void initView() {
-        setContentView(R.layout.activity_edit);
         uploadBtn = (TextView) findViewById(R.id.content_main_btn_upload);
         chooseMenu = (LinearLayout) findViewById(R.id.rl_ll_menu_choose);
         reasonBtn = (TextView) findViewById(R.id.rl_ll_tv_reason);
@@ -153,14 +154,18 @@ public class EditActivity extends AppCompatActivity implements
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadDialog = DialogUtil.LoginDialog(EditActivity.this);
-                uploadDialog.show();
-                HashMap<String, String> map = new HashMap<>();
-                AllTripToJson js = new AllTripToJson(context);
-                map.put("TRIPINFO", js.allTripInfoToJSON(MyApplication.getInstance().getUserInfo().getEmail()).toString());
-                map.put("PERSID", MyApplication.getInstance().getUserInfo().getEmail());
-                map.put("ACTTDATE", DateConvertUtil.TimeStamp() + "");
-                uploadTravel(map);
+                if(haveData){
+                    uploadDialog = DialogUtil.LoginDialog(EditActivity.this);
+                    uploadDialog.show();
+                    HashMap<String, String> map = new HashMap<>();
+                    AllTripToJson js = new AllTripToJson(context);
+                    map.put("TRIPINFO", js.allTripInfoToJSON(MyApplication.getInstance().getUserInfo().getEmail()).toString());
+                    map.put("PERSID", MyApplication.getInstance().getUserInfo().getEmail());
+                    map.put("ACTTDATE", DateConvertUtil.TimeStamp() + "");
+                    uploadTravel(map);
+                }else{
+                    TUtil.TLong("No data, needn't to upload ");
+                }
             }
         });
 
@@ -254,6 +259,12 @@ public class EditActivity extends AppCompatActivity implements
         mLines.clear();
         MarkIndex = 0;
         markerHashMap.clear();
+        if(tripPointInfos.size()==0){
+            TUtil.TLong("noData");
+            haveData =false;
+            return;
+        }
+        haveData = true;
         for (TripPointInfo info : tripPointInfos){
 
             mLines.add(info.getAddress());

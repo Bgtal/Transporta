@@ -3,6 +3,7 @@ package blq.ssnb.trive.service;
 import com.google.android.gms.maps.model.LatLng;
 
 import blq.ssnb.trive.app.MyApplication;
+import blq.ssnb.trive.db.CacheDB;
 import blq.ssnb.trive.db.TripPointDB;
 import blq.ssnb.trive.model.TripPointInfo;
 import blq.ssnb.trive.model.TripPointInfo.DrawStyle;
@@ -14,15 +15,23 @@ import android.os.Message;
 import android.os.Parcelable;
 
 public class RecordManager {
-	
+
+	private static final String typeLastStop="typeLastStop";
+	private static final String typeTemporary="typeTemporary";
+	private static final String typeLastPoint="typeLastPoint";
+
 	private RecordCallBackHandler call = null ;
 	private static RecordManager recordManager;
 	private Location lastStopLocation;
 	private Location lastPointLocation;
 	private TripPointDB tripDB;
 	private Location temporaryStopLocation;
-	
+	private CacheDB cacheDB;
+
+
+
 	private RecordManager(){}
+
 	/**
 	 * 懒加载，获取单例
 	 * @return
@@ -34,12 +43,28 @@ public class RecordManager {
 		return recordManager;
 	}
 	/**
+	 * 数据库的懒加载
+	 * @return
+	 */
+	private TripPointDB getTripDB() {
+		if(tripDB==null){
+			tripDB = new TripPointDB(MyApplication.getInstance().getApplicationContext());
+		}
+		return tripDB;
+	}
+	private CacheDB getCacheDB() {
+		if(cacheDB==null){
+			cacheDB = new CacheDB(MyApplication.getInstance().getApplicationContext());
+		}
+		return cacheDB;
+	}
+	/**
 	 * 获取最后一个停止点的对象
 	 * @return
 	 */
 	public Location getLastStopLocation() {
 		if(lastStopLocation ==null){
-			lastStopLocation = MapUtil.getLastStopLocation(MyApplication.getInstance().getApplicationContext());
+			lastStopLocation = getCacheDB().readCache(typeLastStop);
 		}
 		return lastStopLocation;
 	}
@@ -48,7 +73,7 @@ public class RecordManager {
 	 * @param lastStopLocation
 	 */
 	public void setLastStopLocation(Location lastStopLocation) {
-		MapUtil.setLastStopLocation(MyApplication.getInstance().getApplicationContext(), lastStopLocation);
+		getCacheDB().addCache(typeLastStop, lastStopLocation);
 		this.lastStopLocation = lastStopLocation;
 	}
 	/**
@@ -56,7 +81,8 @@ public class RecordManager {
 	 * @param time
 	 */
 	public void setLastStopLocationTime(Long time){
-		MapUtil.setLastStopLocationTime(MyApplication.getInstance().getApplicationContext(), time);
+//		MapUtil.setLastStopLocationTime(MyAppLication.getInstance().getApplicationContext(), time);
+		getCacheDB().updateCache(typeLastStop, time+"");
 		this.lastStopLocation.setTime(time);
 	}
 
@@ -66,7 +92,7 @@ public class RecordManager {
 	 */
 	public Location getLastPointLocation() {
 		if(lastPointLocation==null){
-			lastPointLocation = MapUtil.getLastPointLocation(MyApplication.getInstance().getApplicationContext());
+			lastPointLocation = getCacheDB().readCache(typeLastPoint);
 		}
 		return lastPointLocation;
 	}
@@ -75,19 +101,10 @@ public class RecordManager {
 	 * @param lastPointLocation
 	 */
 	public void setLastPointLocation(Location lastPointLocation) {
-		MapUtil.setLastPointLocation(MyApplication.getInstance().getApplicationContext(), lastPointLocation);
+		getCacheDB().addCache(typeLastPoint, lastPointLocation);
 		this.lastPointLocation = lastPointLocation;
 	}
-	/**
-	 * 数据库的懒加载
-	 * @return
-	 */
-	private TripPointDB getTripDB() {		
-		if(tripDB==null){
-			tripDB = new TripPointDB(MyApplication.getInstance().getApplicationContext());
-		}
-		return tripDB;
-	}
+
 
 	public void WriteToDB(Location location,DrawStyle style){
 		TripPointInfo point = new TripPointInfo();
@@ -97,15 +114,15 @@ public class RecordManager {
 		point.setStyle(style);
 		getTripDB().addTripPoint(point);
 	}
-	
+
 	/**
 	 * 获取临时停止点的对象
 	 * @return
 	 */
 	public Location getTemporaryStopLocation() {
 		if(temporaryStopLocation == null && MapUtil.isTemporaryStopNotNull(MyApplication.getInstance().getApplicationContext())){
-			
-			temporaryStopLocation = MapUtil.getTemporaryStopLocation(MyApplication.getInstance().getApplicationContext());
+			temporaryStopLocation = getCacheDB().readCache(typeTemporary);
+//			temporaryStopLocation = MapUtil.getTemporaryStopLocation(MyAppLication.getInstance().getApplicationContext());
 		}
 		return temporaryStopLocation;
 	}
@@ -125,20 +142,20 @@ public class RecordManager {
 	public void setActivityRequestCallBack(RecordCallBackHandler callHandler) {
 		this.call = callHandler;
 	}
-	
+
 	public void  callBackActivity(Location location,DrawStyle style){
 		if(call!=null){
 			Message msg = new Message();
 			Bundle bundle = new Bundle();
 			switch (style) {
-			case LINE:
-				bundle.putString("style", "line");
-				break;
-			case MARK:
-				bundle.putString("style", "mark");
-				break;
-			default:
-				break;
+				case LINE:
+					bundle.putString("style", "line");
+					break;
+				case MARK:
+					bundle.putString("style", "mark");
+					break;
+				default:
+					break;
 			}
 			bundle.putParcelable("location", (Parcelable)location);
 			msg.setData(bundle);

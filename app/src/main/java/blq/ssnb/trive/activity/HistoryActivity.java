@@ -75,11 +75,10 @@ public class HistoryActivity extends AppCompatActivity {
         }else{
             MLog.e("history", "meiyou shuju ");
             TextView view = new TextView(this);
-            view.setText("没有历史记录");
+            view.setText("No History");
             view.setTextSize(20);
             view.setGravity(Gravity.CENTER);
-            LinearLayout layout =(LinearLayout)findViewById(R.id.history_main_layout);
-            layout.addView(view);
+            findViewById(R.id.no_history_record).setVisibility(View.VISIBLE);
         }
     }
 

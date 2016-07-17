@@ -9,30 +9,7 @@ public class DbConstant {
 
 	public static final String DB_NAME = "user2.db";
 	public static final int DB_VERSION = 6;
-	/*
-	public static final String TABLE_NAME_PERSON = "person";
 
-	public static final String PERSON_FIEID_PERSONID = "PERSID";//用户手机号
-	public static final String PERSON_FIEID_HHID = "HHID";//用户绑定的家庭编号
-	public static final String PERSON_FIEID_AGE = "AGE";//年龄
-	public static final String PERSON_FIEID_OCCUP = "OCCUP";//职业
-	public static final String PERSON_FIEID_INDUSTRY = "INDUSTRY";//行业
-	public static final String PERSON_FIEID_SEX = "SEX";//性别
-	public static final String PERSON_FIEID_REGISTERTIME = "REGISTERTIME";//注册时间
-	 */	/**
-	 * 创建用户表
-	 */
-	/*	public static final String CREATE_TABLE_PERSON =
-			"CREATE TABLE IF NOT EXISTS "
-			+TABLE_NAME_PERSON
-			+" ("+PERSON_FIEID_PERSONID+" VARCHAR(11) NOT NULL,"
-			+PERSON_FIEID_HHID+" INTEGER NULL,"
-			+PERSON_FIEID_REGISTERTIME+" INTEGER ,"
-			+PERSON_FIEID_AGE+" INTEGER NOT NULL,"
-			+PERSON_FIEID_OCCUP+" VARCHAR(100) NOT NULL,"
-			+PERSON_FIEID_INDUSTRY+" VARCHAR(100) NOT NULL,"
-			+PERSON_FIEID_SEX+" INTEGER NOT NULL DEFAULT '0',"
-			+"PRIMARY KEY ("+PERSON_FIEID_PERSONID+"))";*/
 	public static final String TABLE_NAME_USER="user";
 
 	public static final String USER_FIEID_EMAIL = "email";//用户手机号

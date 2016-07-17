@@ -31,6 +31,8 @@ public class DbHelper extends SQLiteOpenHelper {
 		db.execSQL(DbConstant.CREATE_TABLE_POINTS);
 		
 		db.execSQL(DbConstant.CREATE_TABLE_HISTORY);
+
+		db.execSQL(DbConstant.CREATE_TABLE_CACHE);
 	}
 
 	@Override
