@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activity.RegisterActivity"
+    tools:showIn="@layout/activity_new_register"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/register_title"
+        android:textColor="#3f3f3f"
+        android:textSize="22sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Email" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/register_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/bg_edit_black_border"
+                    android:inputType="textEmailAddress"
+                    android:padding="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <include
+                    android:id="@+id/register_radio_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    layout="@layout/register_tow_radio_item" />
+
+                <TextView
+                    android:layout_width="10dp"
+                    android:layout_height="1dp" />
+
+                <include
+                    android:id="@+id/register_age_layout"
+                    layout="@layout/register_item_title_spinner" />
+            </LinearLayout>
+
+            <include
+                android:id="@+id/register_wa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/register_tow_radio_item" />
+
+            <include
+                android:id="@+id/country_of_birth"
+                layout="@layout/register_item_title_spinner" />
+
+            <include
+                android:id="@+id/dirver"
+                layout="@layout/register_item_title_spinner" />
+
+            <include
+                android:id="@+id/employment"
+                layout="@layout/register_item_title_spinner" />
+
+            <include
+                android:id="@+id/studying"
+                layout="@layout/register_item_title_spinner" />
+
+            <!-- 第二页 -->
+
+            <LinearLayout
+                android:id="@+id/register_second_page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <include
+                    android:id="@+id/place_of_work"
+                    layout="@layout/register_item_title_spinner" />
+
+                <include
+                    android:id="@+id/industry"
+                    layout="@layout/register_item_title_spinner" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/occupation" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <EditText
+                        android:id="@+id/occupation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:background="@drawable/bg_edit_black_border"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp" />
+                </LinearLayout>
+
+                <include
+                    android:id="@+id/study_at_which_level"
+                    layout="@layout/register_item_title_spinner" />
+
+                <include
+                    android:id="@+id/other_activites"
+                    layout="@layout/register_item_title_spinner" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/register_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_btn_black_gray"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/register_btn"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_register" />
+
+                <TextView
+                    android:id="@+id/register_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/get_register"
+                    android:textColor="#0080C0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/point" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

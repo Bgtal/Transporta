@@ -3,6 +3,9 @@ package blq.ssnb.trive.service;
 import android.app.IntentService;
 import android.content.Intent;
 import android.location.Location;
+
+import blq.ssnb.trive.app.MyApplication;
+import blq.ssnb.trive.constant.PlistConstant;
 import blq.ssnb.trive.util.RecordUtil;
 
 import com.google.android.gms.location.LocationResult;
@@ -23,6 +26,9 @@ public class BackgroundRecodingIntentService extends IntentService{
 		
 		//如果在记录的时间范围内，那么就应该被允许记录，否则就抛弃掉
 		if(RecordUtil.needRecord()){
+			if(MyApplication.getInstance().getUserInfo()==null){
+					return;
+			}
 //			WriteFileUtil.writeByNameAndContent("流程记录","IntentService");
 			RecordManager manager = RecordManager.getInstance();
 			//如果没有地址就返回

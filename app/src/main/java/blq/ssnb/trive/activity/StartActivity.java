@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.content.Intent;
 
-import blq.ssnb.trive.NewMainActivity;
 import blq.ssnb.trive.R;
 import blq.ssnb.trive.R.string;
 import blq.ssnb.trive.app.AppManager;
@@ -70,8 +69,7 @@ public class StartActivity extends BaseActivity {
 				}
 			}else{
 				//没有超时就进入主界面
-//				loginSuccess();
-				loginActivity();
+				loginSuccess();
 			}
 		}else{
 			//没有就返回失败，到登录界面
@@ -132,13 +130,14 @@ public class StartActivity extends BaseActivity {
 	private void loginSuccess() {
 		preference.saveLong(PlistConstant.AUTO_LOGIN_TIME, System.currentTimeMillis());
 		preference.saveBoolean(PlistConstant.AUTO_LOGIN_ISAUTO, true);
-		startActivity(new Intent(StartActivity.this,NewMainActivity.class));
+		startActivity(new Intent(StartActivity.this,MainActivity.class));
 		AppManager.finishActivity(StartActivity.class);
 	}
 	private void loginActivity(){
 		TUtil.TShort(string.auto_login_fail);
 		preference.saveBoolean(PlistConstant.AUTO_LOGIN_ISAUTO, false);
 		preference.saveLong(PlistConstant.AUTO_LOGIN_TIME, 0);
+		preference.saveString(PlistConstant.AUTO_LOGIN_EMAIL,"");
 		MyApplication.getInstance().setUserInfo(null);
 		AppManager.finishActivity(MainActivity.class);
 		startActivity(new Intent(StartActivity.this,LoginActivity.class));

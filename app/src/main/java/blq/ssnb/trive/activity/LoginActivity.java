@@ -11,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import blq.ssnb.trive.NewMainActivity;
 import blq.ssnb.trive.R;
 import blq.ssnb.trive.R.string;
 import blq.ssnb.trive.app.AppManager;
@@ -92,8 +91,7 @@ public class LoginActivity extends BaseActivity{
 
 			@Override
 			public void onClick(View v) {
-				// TODO 这里需要添加跳转的activity
-				//				startActivity(new Intent(LoginActivity.this,));
+				startActivity(new Intent(LoginActivity.this,AboutActivity.class));
 			}
 		});
 
@@ -141,7 +139,7 @@ public class LoginActivity extends BaseActivity{
 									Intent service = new Intent(context,RecordingService.class);
 									startService(service);
 								}
-								startActivity(new Intent(LoginActivity.this,NewMainActivity.class));
+								startActivity(new Intent(LoginActivity.this,MainActivity.class));
 								AppManager.finishActivity(LoginActivity.class);
 							}else{
 								TUtil.TLong(R.string.login_fail);

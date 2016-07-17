@@ -73,10 +73,6 @@ public class MyApplication extends MultiDexApplication {
             if(userModel==null){
                 userModel=getUserDb().selectUsers(emailName);
             }
-            if(userModel==null){
-                userModel = new UserModel();
-                userModel.setEmail("");
-            }
         }
         return userModel;
     }

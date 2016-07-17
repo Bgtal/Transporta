@@ -1,5 +1,7 @@
 package blq.ssnb.trive.model;
 
+import android.support.annotation.NonNull;
+
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -10,8 +12,15 @@ public class MyMarker {
     private Marker marker;
     private String markerTag;
     private MarkerOptions markerOptions;
+    private TripPointInfo tripPointInfo;
 
     public Marker getMarker() {
+        marker.getId();
+        marker.getAlpha();
+        marker.getPosition();
+        marker.getRotation();
+        marker.getSnippet();
+
         return marker;
     }
 
@@ -33,5 +42,13 @@ public class MyMarker {
 
     public void setMarkerOptions(MarkerOptions markerOptions) {
         this.markerOptions = markerOptions;
+    }
+
+    public TripPointInfo getTripPointInfo() {
+        return tripPointInfo;
+    }
+
+    public void setTripPointInfo(TripPointInfo tripPointInfo) {
+        this.tripPointInfo = tripPointInfo;
     }
 }

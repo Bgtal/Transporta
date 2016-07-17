@@ -22,7 +22,8 @@ public class DateConvertUtil {
 		yyyy_MM_dd("yyyy-MM-dd"),
 		yyyy_MM_dd_HH_mm_ss("yyyy-MM-dd HH:mm:ss"),
 		yyyyMMdd("yyyyMMdd"),
-		yyyyMMddHHmmss("yyyyMMddHHmmss");
+		yyyyMMddHHmmss("yyyyMMddHHmmss"),
+		MM_dd_HH_mm("MM-dd HH:mm");
 		private String style;
 		DateFormatStyle(String style){
 			this.style = style;
@@ -30,6 +31,10 @@ public class DateConvertUtil {
 		private String getStyle(){
 			return style;
 		}
+	}
+
+	public static String MM_dd_HH_mm(long time){
+		return MFormat(DateFormatStyle.MM_dd_HH_mm.getStyle(), time);
 	}
 
 	/**

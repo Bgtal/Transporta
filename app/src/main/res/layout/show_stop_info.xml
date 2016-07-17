@@ -55,24 +55,6 @@
             android:textColor="#ff7f7f7f"
             android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="@string/show_stop_info_content"
-            android:textColor="#ff7f7f7f"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/show_history_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="content"
-            android:textColor="#ff7f7f7f"
-            android:textSize="18sp" />
     </LinearLayout>
 
 

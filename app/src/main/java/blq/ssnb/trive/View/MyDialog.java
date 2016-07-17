@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import blq.ssnb.trive.R;
+import blq.ssnb.trive.constant.CommonConstant;
 
 /**
  * 下拉复选框的Dialog
@@ -41,6 +42,14 @@ public class MyDialog extends Dialog{
     private int choosePosition;
     private int olderChoosePosition;
 
+
+
+    public static MyDialog chooseReasonDialog(Context context ,ChooseCallBack callback){
+        return new MyDialog(context,"Why did you stop here?", CommonConstant.RESON,null,null,callback);
+    }
+    public static MyDialog chooseWayDialog(Context context ,ChooseCallBack callback){
+        return new MyDialog(context,"How did you get here?", CommonConstant.WAY,null,null,callback);
+    }
     public MyDialog(Context context,
                     String title,
                     String[] data,
@@ -127,4 +136,8 @@ public class MyDialog extends Dialog{
         super.show();
         chooseSpiner.setSelection(olderChoosePosition);
     }
+    public void setIndex(int position){
+        olderChoosePosition = choosePosition=position;
+    }
+
 }

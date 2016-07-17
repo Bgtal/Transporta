@@ -27,7 +27,11 @@ public class DialogUtil {
 		return dialog;
 	
 	}
-	
+
+	public static Dialog upLoadDialog(Activity activity){
+		return Dialog(activity,R.string.upload_dialog_hint);
+	}
+
 	public static Dialog LoginDialog(Activity context) {
 		return Dialog(context, R.string.first_start_dialog_text);
 	}

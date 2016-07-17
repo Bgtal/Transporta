@@ -13,7 +13,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,7 +24,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -63,22 +69,17 @@ import blq.ssnb.trive.util.DialogUtil;
 import blq.ssnb.trive.util.TUtil;
 import okhttp3.Call;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
-
-    private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
+public class EditActivity extends AppCompatActivity implements
+        OnMapReadyCallback,
+        GoogleMap.OnMarkerClickListener{
 
     private Context context;
     private GoogleMap googleMap;
 
-    private boolean isBind = false;
-    private ServiceConnection conn;
-    private RecordCallBackHandler recordCallBack;
-
     private List<LatLng> mLines;
     private Map<String,MyMarker> markerHashMap;
     private Marker chooseMarker;
+
 
     private TextView uploadBtn;
     private LinearLayout chooseMenu;
@@ -86,91 +87,73 @@ public class MainActivity extends AppCompatActivity
     private TextView wayBtn;
     private TextView deleteBtn;
 
-    private boolean isAutoMove=true;
-
     private int MarkIndex=0;
     private TripPointDB tdb ;
+    private int chooseDay=1;
+
+    private RadioButton day1Radio;
+    private RadioButton day2Radio;
+    private RadioButton day3Radio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppManager.addActivity(this);
+        setContentView(R.layout.activity_edit);
         context = this;
-        initEvent();
+        initToolBarView();
         initData();
         initView();
         bindEvent();
     }
-
-    private void initEvent() {
-        recordCallBack = new RecordCallBackHandler() {
+    private void initToolBarView() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ImageView backBtn = (ImageView) findViewById(R.id.nv_back);
+        assert backBtn != null;
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void line(Location location) {
-                LatLng line = new LatLng(location.getLatitude(), location.getLongitude());
-                mLines.add(line);
-                updateMapView(mLines);
+            public void onClick(View v) {
+                EditActivity.this.finish();
             }
-
-            @Override
-            public void mark(Location location) {
-                drawTravel();
-            }
-        };
+        });
+        TextView titleView = (TextView) findViewById(R.id.nv_title);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        assert titleView != null;
+        titleView.setText("Edit");
     }
 
-
     private void initData() {
-        conn = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-
-                RecordManager.getInstance().setActivityRequestCallBack(recordCallBack);
-                isBind = true;
-            }
-        };
         mLines = new ArrayList<>();
         markerHashMap = new HashMap<>();
         tdb = new TripPointDB(context);
     }
 
     private void initView() {
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_user_name)).
-                setText(MyApplication.getInstance().getUserInfo().getEmail());
-
+        setContentView(R.layout.activity_edit);
         uploadBtn = (TextView) findViewById(R.id.content_main_btn_upload);
         chooseMenu = (LinearLayout) findViewById(R.id.rl_ll_menu_choose);
         reasonBtn = (TextView) findViewById(R.id.rl_ll_tv_reason);
         wayBtn = (TextView) findViewById(R.id.rl_ll_tv_way);
         deleteBtn = (TextView) findViewById(R.id.rl_ll_tv_delete);
+        day1Radio = (RadioButton) findViewById(R.id.radio_day1);
+        day1Radio.setChecked(true);
+        day2Radio = (RadioButton) findViewById(R.id.radio_day2);
+        day3Radio = (RadioButton) findViewById(R.id.radio_day3);
+
+
         //这个最后执行，避免由于执行顺序导致的错误
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.main_map);
         mapFragment.getMapAsync(this);
 
     }
+
     private Dialog uploadDialog;
     private void bindEvent() {
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadDialog = DialogUtil.LoginDialog(MainActivity.this);
+                uploadDialog = DialogUtil.LoginDialog(EditActivity.this);
                 uploadDialog.show();
                 HashMap<String, String> map = new HashMap<>();
                 AllTripToJson js = new AllTripToJson(context);
@@ -199,49 +182,34 @@ public class MainActivity extends AppCompatActivity
                 deleteMarker();
             }
         });
-    }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_history) {
-            //启动历史记录activity
-            startActivity(new Intent(MainActivity.this, HistoryActivity.class));
-        } else if (id == R.id.nav_edit) {
-            //启动编辑最近三天的activity
-            startActivity(new Intent(MainActivity.this,EditActivity.class));
-        } else if (id == R.id.nav_about) {
-            startActivity(new Intent(MainActivity.this,AboutActivity.class));
-        } else if (id == R.id.nav_log_out) {
-            new ExitDialog(context, new MyDialog.ButtonEvent() {
-                @Override
-                public void onClick() {
-                    MyApplication.getInstance().getLoginPf().saveString(PlistConstant.AUTO_LOGIN_EMAIL,"");
-                    MyApplication.getInstance().getLoginPf().saveBoolean(PlistConstant.AUTO_LOGIN_ISAUTO,false);
-                    MyApplication.getInstance().getLoginPf().saveLong(PlistConstant.AUTO_LOGIN_TIME,0);
-                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
-                    finish();
+        day1Radio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    chooseDay = 1;
+                    drawTravel(chooseDay);
                 }
-            },null)
-                    .show();
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+            }
+        });
+        day2Radio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    chooseDay = 2;
+                    drawTravel(chooseDay);
+                }
+            }
+        });
+        day3Radio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    chooseDay = 3;
+                    drawTravel(chooseDay);
+                }
+            }
+        });
     }
 
     @Override
@@ -252,14 +220,12 @@ public class MainActivity extends AppCompatActivity
         this.googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                isAutoMove = false;
                 chooseMenu.setVisibility(View.GONE);
             }
         });
         this.googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override
             public boolean onMyLocationButtonClick() {
-                isAutoMove = true;
                 return false;
             }
         });
@@ -269,52 +235,21 @@ public class MainActivity extends AppCompatActivity
                 chooseMenu.setVisibility(View.GONE);
             }
         });
-        Intent serviceIntent = new Intent(this,RecordingService.class);
-        bindService(serviceIntent, conn, Context.BIND_AUTO_CREATE);
-        drawTravel();
-        //如果可以更新就显示更新按钮
-        if(canUpdate()){
-            uploadBtn.setVisibility(View.VISIBLE);
-        }
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},
-                        REQUEST_CODE_ASK_PERMISSIONS);
-            }
-            return;
-        }
-        this.googleMap.setMyLocationEnabled(true);
-
+        drawTravel(chooseDay);
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        isAutoMove =false;
         chooseMarker = marker;
         chooseMenu.setVisibility(View.VISIBLE);
         return false;
     }
 
     /**
-     * 判断是否可以更新
-     * @return true 可以更新状态，false 不可以更新状态
-     */
-    private boolean canUpdate() {
-
-        return System.currentTimeMillis()>(DateConvertUtil.DateTodayLong()+SetConstant.singleton().getUpdateTime()* CommonConstant.ONE_HOUR_LONG);
-    }
-
-
-
-    /**
      * 画图，当第一次进入或者回调添加marker
      */
-    private void drawTravel() {
-        List<TripPointInfo> tripPointInfos = listTripPointInfo();
+    private void drawTravel(int chooseDay) {
+        List<TripPointInfo> tripPointInfos = listTripPointInfo(chooseDay);
         googleMap.clear();
         mLines.clear();
         MarkIndex = 0;
@@ -355,9 +290,6 @@ public class MainActivity extends AppCompatActivity
         }
         PolylineOptions polylineOptions = new PolylineOptions().addAll(lines).width(5).color(Color.GREEN);
         googleMap.addPolyline(polylineOptions);
-        if(isAutoMove){
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lines.get(lines.size()-1),16.5f));
-        }
     }
 
     /**
@@ -389,13 +321,14 @@ public class MainActivity extends AppCompatActivity
      * 获得当天的记录点的数据
      * @return 所有当天记录点的数据
      */
-    private List<TripPointInfo> listTripPointInfo(){
+    private List<TripPointInfo> listTripPointInfo(int chooseDay){
         List<TripPointInfo> infos = new ArrayList<>();
 
         if(MyApplication.getInstance().getUserInfo()!=null){
             String uid = MyApplication.getInstance().getUserInfo().getEmail();
             if(uid!=null&&!uid.isEmpty()&&!uid.equals("")){
-                infos = tdb.selectTodayTripoint(uid);
+                int today = DateConvertUtil.DateTodayInt();
+                infos = tdb.selectTripPoint(today-chooseDay*CommonConstant.ONE_DAY_INT,today,uid);
             }
         }
         return infos;
@@ -478,45 +411,11 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch(requestCode){
-            case REQUEST_CODE_ASK_PERMISSIONS:
-                boolean isGranted = true;
-                for (int result :grantResults){
-                    if(result != PackageManager.PERMISSION_GRANTED){
-                        isGranted = false;
-                    }
-                }
-                if(isGranted){
-                    googleMap.setMyLocationEnabled(true);
-                }else{
-                    TUtil.TLong("WRITE_CONTACTS Denied");
-                }
-                break;
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
         if(googleMap!=null){
-            drawTravel();
-            Intent serviceIntent = new Intent(context,RecordingService.class);
-            bindService(serviceIntent, conn, Context.BIND_AUTO_CREATE);
-            RecordManager.getInstance().setActivityRequestCallBack(recordCallBack);
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if(isBind){
-            this.unbindService(conn);
-            RecordManager.getInstance().setActivityRequestCallBack(null);
-            isBind=false;
+            drawTravel(chooseDay);
         }
     }
 
@@ -526,7 +425,6 @@ public class MainActivity extends AppCompatActivity
         googleMap = null;
         markerHashMap = null;
         mLines = null;
-        conn = null;
     }
 
 }

@@ -113,6 +113,21 @@ public class TripPointDB {
 		db.close();
 	}
 
+	public void updateReson(int pid,int reason){
+		db = dbHelper.getWritableDatabase();
+		String sql = " UPDATE "+DbConstant.TABLE_NAME_TRIPPOINTS+" SET "
+				+DbConstant.TRIPPOINT_FIEID_REASON+" =? ,"
+				+" WHERE " + DbConstant.TRIPPOINT_FIEID_ID + " =? ";
+		db.execSQL(sql,new Object[]{pid,reason});
+	}
+	public void updateWay(int pid,int way){
+		db = dbHelper.getWritableDatabase();
+		String sql = " UPDATE "+DbConstant.TABLE_NAME_TRIPPOINTS+" SET "
+				+DbConstant.TRIPPOINT_FIEID_WAY+" =? ,"
+				+" WHERE " + DbConstant.TRIPPOINT_FIEID_ID + " =? ";
+		db.execSQL(sql,new Object[]{pid,way});
+	}
+
 	//-----------------------删除---------------------
 	/**
 	 * 通过pid移除mark点和信息

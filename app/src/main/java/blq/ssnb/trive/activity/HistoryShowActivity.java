@@ -22,12 +22,9 @@ import blq.ssnb.trive.model.TripPointInfo;
 import blq.ssnb.trive.model.TripPointInfo.DrawStyle;
 import blq.ssnb.trive.util.DateConvertUtil;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.ScrollView;
@@ -44,7 +41,6 @@ public class HistoryShowActivity extends FragmentActivity implements
 	private ScrollView showStopInfoScrollView;
 	private TextView resonView;
 	private TextView wayView;
-	private TextView contentView;
 
 
 	private int date = 0;//用来获取上一个activity传过来的日期 20150101
@@ -65,23 +61,11 @@ public class HistoryShowActivity extends FragmentActivity implements
 		showStopInfoScrollView = (ScrollView) findViewById(R.id.show_stop_info_scroll);
 		resonView = (TextView) findViewById(R.id.show_history_reson);
 		wayView = (TextView) findViewById(R.id.show_history_way);
-		contentView = (TextView) findViewById(R.id.show_history_content);
 	}
 
 	@Override
 	public void onMapReady(GoogleMap Map) {
 		mGoogleMap = Map;
-		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-			// TODO: Consider calling
-			//    ActivityCompat#requestPermissions
-			// here to request the missing permissions, and then overriding
-			//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-			//                                          int[] grantResults)
-			// to handle the case where the user grants the permission. See the documentation
-			// for ActivityCompat#requestPermissions for more details.
-			return;
-		}
-		mGoogleMap.setMyLocationEnabled(false);
 		mGoogleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 		mGoogleMap.setOnMarkerClickListener(this);
 		mGoogleMap.setOnMapClickListener(this);
@@ -127,7 +111,6 @@ public class HistoryShowActivity extends FragmentActivity implements
 		}
 		resonView.setText(CommonConstant.RESON[info.getReason()]);
 		wayView.setText(CommonConstant.WAY[info.getWay()]);
-		contentView.setText(info.getContent());
 	}
 	private void closeInfo(){
 		if(showStopInfoScrollView.getVisibility()==View.VISIBLE){

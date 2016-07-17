@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="blq.ssnb.trive">
+<manifest package="blq.ssnb.trive"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -8,23 +8,23 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <!-- start of copy -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!-- External storage for caching. -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!-- My Location -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!-- Maps API needs OpenGL ES 2.0. -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true" />
+        android:required="true"/>
 
     <!-- End of copy. -->
     <application
@@ -45,44 +45,34 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="@string/google_maps_key"/>
 
         <activity
-            android:name=".NewMainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activity.Explain"
-            android:label="@string/app_name"
             android:launchMode="singleTask">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <!-- trive activity -->
         <activity
-            android:name=".activity.MainActivity"
-            android:launchMode="singleTask" />
-        <activity
             android:name=".activity.StartActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".activity.HistoryActivity"
-            android:launchMode="singleTask" />
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.PersonalActivity" />
-        <activity android:name=".activity.SetUpActivity" />
-        <activity android:name=".activity.HistoryShowActivity" />
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.SetUpActivity"/>
+        <activity android:name=".activity.HistoryShowActivity"/>
         <!-- trive activity end -->
 
 
         <!-- trive service -->
-        <service android:name=".service.RecordingService"></service>
-        <service android:name=".service.BackgroundRecodingIntentService"></service>
+        <service android:name=".service.RecordingService"/>
+        <service android:name=".service.BackgroundRecodingIntentService"/>
         <!-- trive service end -->
 
 
@@ -91,24 +81,37 @@
             android:name=".broadcast.AlarmReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="blq.ssnb.trive.alarm.update" />
-                <action android:name="blq.ssnb.trive.alarm.starservice" />
-                <action android:name="blq.ssnb.trive.alarm.updateconfig" />
-                <action android:name="blq.ssnb.trive.alarm.daemonservice" />
+                <action android:name="blq.ssnb.trive.alarm.update"/>
+                <action android:name="blq.ssnb.trive.alarm.starservice"/>
+                <action android:name="blq.ssnb.trive.alarm.updateconfig"/>
+                <action android:name="blq.ssnb.trive.alarm.daemonservice"/>
             </intent-filter>
         </receiver>
         <receiver
             android:name=".broadcast.SystemReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
         <activity
-            android:name=".activity.TestView"
-            android:label="@string/title_activity_test_view"></activity>
+            android:name=".activity.HistoryActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activity.EditActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activity.AboutActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

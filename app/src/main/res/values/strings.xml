@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Trive</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -67,8 +65,19 @@
     <string name="cancel">Cancel</string>
 
     <string name="nav_history">History</string>
-    <string name="nav_location">Location</string>
+    <string name="nav_about">About App</string>
     <string name="nav_edit">Edit</string>
     <string name="nav_log_out">Log Out</string>
-    <string name="title_activity_test_view">Map</string>
+    <string name="upload">upload</string>
+    <string name="question_stop_reason">Why did you stop here?</string>
+    <string name="question_stop_way">How did you get here?</string>
+    <string name="delete_marker">Delete drop pin</string>
+
+    <string name="login_out_hint">Logout will not delete any data.But we will stop recoding travel.You can still login with this account</string>
+    <string name="upload_dialog_hint">Uploading………</string>
+    <string name="history_list_title">Here only show you upload the record</string>
+    <string name="title_edit">You can edit the last three days of records</string>
+    <string name="about_content">Transporta is designed to track your trip routes and automatically detect where you stop during the day.For each stop we ask that you enter some details of how you got to that stop(bus,walk,etc.) and what was your purpose in going there(work,school,shopping,etc.).
+        \nTracking is started once you login and the app can safely be left on all day without excessive drain on your battery or data.
+    \nNo personal data is saved that could be used to identify any individuals.</string>
 </resources>
