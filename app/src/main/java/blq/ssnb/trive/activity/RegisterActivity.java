@@ -139,7 +139,9 @@ public class RegisterActivity extends AppCompatActivity {
         LinearLayout radioGroup = (LinearLayout) findViewById(R.id.register_radio_group);
         ((TextView)radioGroup.findViewById(R.id.gradio_title)).setText("Gender");
         manRadioBtn = (RadioButton) radioGroup.findViewById(R.id.gradio_btn_fist);
+        manRadioBtn.setText(R.string.men);
         manRadioBtn.setChecked(true);
+        ((RadioButton) radioGroup.findViewById(R.id.gradio_btn_last)).setText(R.string.women);
 
         // age
         LinearLayout ageLayout = (LinearLayout) findViewById(R.id.register_age_layout);
@@ -150,7 +152,9 @@ public class RegisterActivity extends AppCompatActivity {
         LinearLayout waLayout = (LinearLayout)findViewById(R.id.register_wa);
         ((TextView)waLayout.findViewById(R.id.gradio_title)).setText("WA resident or visitor?");
         residentRadioBtn = (RadioButton) waLayout.findViewById(R.id.gradio_btn_fist);
+        residentRadioBtn.setText(R.string.wa_register);
         residentRadioBtn.setChecked(true);
+        ((RadioButton) waLayout.findViewById(R.id.gradio_btn_last)).setText(R.string.visitor);
 
         //birth
         LinearLayout birthLayout = (LinearLayout) findViewById(R.id.country_of_birth);
@@ -400,13 +404,15 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        if(RegularUtil.isEmail(emailStr)){
+//        if(RegularUtil.isEmail(emailStr)){
             registerUser.setEmail(emailStr);
             if(isShowSecondPage()){
                 String occString = occupationEdit.getText().toString().trim();
                 if(occString.isEmpty()||occString.equals("")){
                     TUtil.TLong(R.string.no_occupation);
                     return;
+                }else{
+                    registerUser.setOccupation(occString);
                 }
             }else{
                 registerUser.setWorkspace(-1);
@@ -416,9 +422,9 @@ public class RegisterActivity extends AppCompatActivity {
                 registerUser.setOther_activity(-1);
             }
             httpRegister();
-        }else{
-            TUtil.TLong(R.string.email_address_error);
-        }
+//        }else{
+//            TUtil.TLong(R.string.email_address_error);
+//        }
     }
     /**
      * 请求注册

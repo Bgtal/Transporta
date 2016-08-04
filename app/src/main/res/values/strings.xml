@@ -47,6 +47,8 @@
     <string name="register_title">Register for Transporta</string>
     <string name="occupation">Occupation</string>
     <string name="gender">Gender:</string>
+    <string name="wa_register">WA_Resident</string>
+    <string name="visitor">Visitor</string>
     <string name="age">Age</string>
     <string name="auto_login_fail">Login fail,Please re-login</string>
     <string name="login_fail">Login fail</string>

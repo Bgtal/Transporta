@@ -74,11 +74,11 @@ public class LoginActivity extends BaseActivity{
 					TUtil.TLong(string.no_email);
 					return;
 				}
-				if(RegularUtil.isEmail(email)){
+//				if(RegularUtil.isEmail(email)){
 					httpLogin(email);
-				}else{
-					TUtil.TLong(string.email_address_error);
-				}
+//				}else{
+//					TUtil.TLong(string.email_address_error);
+//				}
 			}
 		});
 		registerBtn.setOnClickListener(new OnClickListener() {

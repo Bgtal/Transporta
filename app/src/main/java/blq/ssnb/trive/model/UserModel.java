@@ -8,7 +8,7 @@ public class UserModel {
 	private String email;
 	private int gender=0;//0是男的，1是女的
 	private int	resident=0;//0是本土 1是游客
-	private int age;
+	private int age=10;
 	private String birth_country;
 	private int	driver_licence;
 	private int employment;
