@@ -82,4 +82,5 @@
     <string name="about_content">Transporta is designed to track your trip routes and automatically detect where you stop during the day.For each stop we ask that you enter some details of how you got to that stop(bus,walk,etc.) and what was your purpose in going there(work,school,shopping,etc.).
         \nTracking is started once you login and the app can safely be left on all day without excessive drain on your battery or data.
     \nNo personal data is saved that could be used to identify any individuals.</string>
+    <string name="Other">Other:</string>
 </resources>

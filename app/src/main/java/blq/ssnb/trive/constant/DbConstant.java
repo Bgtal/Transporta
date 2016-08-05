@@ -17,7 +17,7 @@ public class DbConstant {
 	public static final String USER_FIEID_RESIDENT = "resident";//是否本地人
 	public static final String USER_FIEID_AGE = "age";//年龄
 
-	public static final String USER_FIEID_BIRTH_COUNTRY = "birth_country";//
+	public static final String USER_FIEID_OTHER = "birth_country";//
 	public static final String USER_FIEID_DRIVER_LICENCE = "driver_licence";//
 	public static final String USER_FIEID_EMPLOYMENT = "employment";//
 	public static final String USER_FIEID_STUDYING = "studying";//
@@ -35,7 +35,7 @@ public class DbConstant {
 					USER_FIEID_GENDER+" tinyint(4) NOT NULL, "+
 					USER_FIEID_RESIDENT+" tinyint(4) NOT NULL, "+
 					USER_FIEID_AGE+" int(11) NOT NULL, "+
-					USER_FIEID_BIRTH_COUNTRY+" varchar(20) NOT NULL, "+
+					USER_FIEID_OTHER +" varchar(20) NOT NULL, "+
 					USER_FIEID_DRIVER_LICENCE+" int(11) NOT NULL, "+
 					USER_FIEID_EMPLOYMENT+" int(11) NOT NULL, "+
 					USER_FIEID_STUDYING+" int(11) NOT NULL, "+

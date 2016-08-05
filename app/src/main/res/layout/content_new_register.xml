@@ -89,10 +89,6 @@
                 layout="@layout/register_tow_radio_item" />
 
             <include
-                android:id="@+id/country_of_birth"
-                layout="@layout/register_item_title_spinner" />
-
-            <include
                 android:id="@+id/dirver"
                 layout="@layout/register_item_title_spinner" />
 
@@ -119,7 +115,6 @@
                 <include
                     android:id="@+id/industry"
                     layout="@layout/register_item_title_spinner" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -155,6 +150,32 @@
                     layout="@layout/register_item_title_spinner" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Other" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/register_other"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/bg_edit_black_border"
+                    android:padding="5dp" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/register_btn"
                 android:layout_width="match_parent"
@@ -172,7 +193,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal" >
 

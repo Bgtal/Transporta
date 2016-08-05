@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
@@ -29,6 +30,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -178,7 +180,7 @@ public class MainActivity extends AppCompatActivity
                 AllTripToJson js = new AllTripToJson(context);
                 map.put("TRIPINFO", js.allTripInfoToJSON(MyApplication.getInstance().getUserInfo().getEmail()).toString());
                 map.put("PERSID", MyApplication.getInstance().getUserInfo().getEmail());
-                map.put("ACTTDATE", DateConvertUtil.TimeStamp() + "");
+                map.put("ACTTDATE", DateConvertUtil.DateTodayInt() + "");
                 uploadTravel(map);
             }
         });
@@ -328,6 +330,7 @@ public class MainActivity extends AppCompatActivity
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(info.getAddress());
                 markerOptions.title("stop"+MarkIndex);
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(MarkIndex * 360 / tripPointInfos.size()));
                 MarkIndex++;
                 markerOptions.snippet(DateConvertUtil.MM_dd_HH_mm(info.getStamp()*1000L));
                 Marker mMarker = googleMap.addMarker(markerOptions);

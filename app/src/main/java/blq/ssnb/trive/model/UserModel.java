@@ -9,7 +9,7 @@ public class UserModel {
 	private int gender=0;//0是男的，1是女的
 	private int	resident=0;//0是本土 1是游客
 	private int age=10;
-	private String birth_country;
+	private String birth_country="";//自立从出生城市改为other可选项
 	private int	driver_licence;
 	private int employment;
 	private int studying;

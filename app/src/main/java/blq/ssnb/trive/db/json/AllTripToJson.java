@@ -22,15 +22,6 @@ public class AllTripToJson {
 		this.context = context;
 	}
 
-	public JSONArray getTripoint(){
-		JSONArray allTripJson =new JSONArray();
-		TripPointDB db = new TripPointDB(MyApplication.getInstance().getApplicationContext());
-		List<TripPointInfo> allTripsInfo =db.selectTodayTripoint("1234567890");
-		allTripJson = tripJSON(allTripsInfo);
-		MLog.e("json", allTripJson.toString());
-		return allTripJson;
-	}
-
 	/*
 	 * [{"STOPTIME":1433840781,
 	 * "STOPPOINT":"29.9137297,121.6071669",

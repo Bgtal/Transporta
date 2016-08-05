@@ -77,8 +77,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private RadioButton residentRadioBtn;//本地人
 
-    private Spinner birthSpinner;//出生地
-    private String[] birthStrings;//出生地选项
+//    private Spinner birthSpinner;//出生地
+//    private String[] birthStrings;//出生地选项
 
     private Spinner driverSpinner;//驾驶证
     private String[] driverStrings;//驾驶证选项
@@ -105,6 +105,8 @@ public class RegisterActivity extends AppCompatActivity {
     private Spinner otherActivitySpinner;//其他活动
     private String[] otherActivityStrings;//其他活动选项
 
+    private EditText otherEdit;
+
     private TextView registerBtn;
 
     private TextView backLoginBtn;//返回登录按键
@@ -120,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
         preferenceUtil = new PreferenceUtil(context, PlistConstant.FILE_NAME_AUTO_LOGIN);
         registerUser= new UserModel();
         ageStrings = CommonConstant.getAges();
-        birthStrings = getResources().getStringArray(R.array.birth_array);
+//        birthStrings = getResources().getStringArray(R.array.birth_array);
         driverStrings = getResources().getStringArray(R.array.driver_array);
         employmentStrings = getResources().getStringArray(R.array.employment_array);
         studyingStrings = getResources().getStringArray(R.array.studying_array);
@@ -157,9 +159,9 @@ public class RegisterActivity extends AppCompatActivity {
         ((RadioButton) waLayout.findViewById(R.id.gradio_btn_last)).setText(R.string.visitor);
 
         //birth
-        LinearLayout birthLayout = (LinearLayout) findViewById(R.id.country_of_birth);
-        ((TextView)birthLayout.findViewById(R.id.register_title)).setText("Country of birth:");
-        birthSpinner = (Spinner) birthLayout.findViewById(R.id.register_spinner);
+//        LinearLayout birthLayout = (LinearLayout) findViewById(R.id.country_of_birth);
+//        ((TextView)birthLayout.findViewById(R.id.register_title)).setText("Country of birth:");
+//        birthSpinner = (Spinner) birthLayout.findViewById(R.id.register_spinner);
 
         //driver's licence
         LinearLayout dirverLayout = (LinearLayout) findViewById(R.id.dirver);
@@ -201,6 +203,8 @@ public class RegisterActivity extends AppCompatActivity {
         ((TextView)otherLayout.findViewById(R.id.register_title)).setText("Other activites:");
         otherActivitySpinner = (Spinner) otherLayout.findViewById(R.id.register_spinner);
 
+        otherEdit = (EditText) findViewById(R.id.register_other);
+
         //register_btn
         registerBtn = (TextView) findViewById(R.id.register_btn);
 
@@ -211,7 +215,7 @@ public class RegisterActivity extends AppCompatActivity {
     void updateView() {
 
         bindAdapter(ageSpinner,ageStrings);
-        bindAdapter(birthSpinner,birthStrings);
+//        bindAdapter(birthSpinner,birthStrings);
         bindAdapter(driverSpinner,driverStrings);
         bindAdapter(employmentSpinner,employmentStrings);
         bindAdapter(studyingSpinner,studyingStrings);
@@ -264,7 +268,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
-        birthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+ /*       birthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -276,7 +280,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
         driverSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -405,23 +409,24 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
 //        if(RegularUtil.isEmail(emailStr)){
-            registerUser.setEmail(emailStr);
-            if(isShowSecondPage()){
-                String occString = occupationEdit.getText().toString().trim();
-                if(occString.isEmpty()||occString.equals("")){
-                    TUtil.TLong(R.string.no_occupation);
-                    return;
-                }else{
-                    registerUser.setOccupation(occString);
-                }
+        registerUser.setEmail(emailStr);
+        if(isShowSecondPage()){
+            String occString = occupationEdit.getText().toString().trim();
+            if(occString.isEmpty()||occString.equals("")){
+                TUtil.TLong(R.string.no_occupation);
+                return;
             }else{
-                registerUser.setWorkspace(-1);
-                registerUser.setOccupation("");
-                registerUser.setIndustry(-1);
-                registerUser.setStudy_level(-1);
-                registerUser.setOther_activity(-1);
+                registerUser.setOccupation(occString);
             }
-            httpRegister();
+        }else{
+            registerUser.setWorkspace(-1);
+            registerUser.setOccupation("");
+            registerUser.setIndustry(-1);
+            registerUser.setStudy_level(-1);
+            registerUser.setOther_activity(-1);
+        }
+        registerUser.setBirth_country(otherEdit.getText().toString().trim());
+        httpRegister();
 //        }else{
 //            TUtil.TLong(R.string.email_address_error);
 //        }

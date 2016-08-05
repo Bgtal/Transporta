@@ -301,6 +301,8 @@ public class EditActivity extends AppCompatActivity implements
         }
         PolylineOptions polylineOptions = new PolylineOptions().addAll(lines).width(5).color(Color.GREEN);
         googleMap.addPolyline(polylineOptions);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lines.get(lines.size()-1),15));
+
     }
 
     /**

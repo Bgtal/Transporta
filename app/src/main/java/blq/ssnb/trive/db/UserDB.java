@@ -26,7 +26,7 @@ public class UserDB {
 				+DbConstant.USER_FIEID_GENDER+","
 				+DbConstant.USER_FIEID_RESIDENT+","
 				+DbConstant.USER_FIEID_AGE+","
-				+DbConstant.USER_FIEID_BIRTH_COUNTRY+","
+				+DbConstant.USER_FIEID_OTHER +","
 				+DbConstant.USER_FIEID_DRIVER_LICENCE +","
 				+DbConstant.USER_FIEID_EMPLOYMENT+","
 				+DbConstant.USER_FIEID_STUDYING +","
@@ -77,7 +77,7 @@ public class UserDB {
 			model.setGender(cursor.getInt(cursor.getColumnIndex(DbConstant.USER_FIEID_GENDER)));
 			model.setResident(cursor.getInt(cursor.getColumnIndex(DbConstant.USER_FIEID_RESIDENT)));
 			model.setAge(cursor.getInt(cursor.getColumnIndex(DbConstant.USER_FIEID_AGE)));
-			model.setBirth_country(cursor.getString(cursor.getColumnIndex(DbConstant.USER_FIEID_BIRTH_COUNTRY)));
+			model.setBirth_country(cursor.getString(cursor.getColumnIndex(DbConstant.USER_FIEID_OTHER)));
 			model.setDriver_licence(cursor.getInt(cursor.getColumnIndex(DbConstant.USER_FIEID_DRIVER_LICENCE)));
 			model.setEmployment(cursor.getInt(cursor.getColumnIndex(DbConstant.USER_FIEID_EMPLOYMENT)));
 
