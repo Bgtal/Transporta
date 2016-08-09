@@ -35,6 +35,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -59,6 +60,7 @@ import blq.ssnb.trive.db.TripPointDB;
 import blq.ssnb.trive.db.json.AllTripToJson;
 import blq.ssnb.trive.http.okhttp.OkHttpUtils;
 import blq.ssnb.trive.http.okhttp.callback.StringCallback;
+import blq.ssnb.trive.http.okhttp.utils.L;
 import blq.ssnb.trive.model.MyMarker;
 import blq.ssnb.trive.model.TripPointInfo;
 import blq.ssnb.trive.service.RecordCallBackHandler;
@@ -94,6 +96,8 @@ public class EditActivity extends AppCompatActivity implements
     private RadioButton day1Radio;
     private RadioButton day2Radio;
     private RadioButton day3Radio;
+
+    private int chooseDayInt;
 
     private boolean haveData = false;
 
@@ -138,6 +142,7 @@ public class EditActivity extends AppCompatActivity implements
         deleteBtn = (TextView) findViewById(R.id.rl_ll_tv_delete);
         day1Radio = (RadioButton) findViewById(R.id.radio_day1);
         day1Radio.setChecked(true);
+        chooseDayInt = DateConvertUtil.DateTodayInt()-CommonConstant.ONE_DAY_INT;
         day2Radio = (RadioButton) findViewById(R.id.radio_day2);
         day3Radio = (RadioButton) findViewById(R.id.radio_day3);
 
@@ -161,7 +166,7 @@ public class EditActivity extends AppCompatActivity implements
                     AllTripToJson js = new AllTripToJson(context);
                     map.put("TRIPINFO", js.allTripInfoToJSON(MyApplication.getInstance().getUserInfo().getEmail()).toString());
                     map.put("PERSID", MyApplication.getInstance().getUserInfo().getEmail());
-                    map.put("ACTTDATE", DateConvertUtil.TimeStamp() + "");
+                    map.put("ACTTDATE", chooseDayInt+ "");
                     uploadTravel(map);
                 }else{
                     TUtil.TLong("No data, needn't to upload ");
@@ -274,6 +279,12 @@ public class EditActivity extends AppCompatActivity implements
                 markerOptions.title("stop"+MarkIndex);
                 MarkIndex++;
                 markerOptions.snippet(DateConvertUtil.MM_dd_HH_mm(info.getStamp()*1000L));
+                markerOptions.icon(
+                        BitmapDescriptorFactory
+                                .defaultMarker(
+                                        (MarkIndex%14)*360/14
+                                )
+                );
                 Marker mMarker = googleMap.addMarker(markerOptions);
 
                 MyMarker myMarker = new MyMarker();
@@ -341,7 +352,10 @@ public class EditActivity extends AppCompatActivity implements
             String uid = MyApplication.getInstance().getUserInfo().getEmail();
             if(uid!=null&&!uid.isEmpty()&&!uid.equals("")){
                 int today = DateConvertUtil.DateTodayInt();
-                infos = tdb.selectTripPoint(today-chooseDay*CommonConstant.ONE_DAY_INT,today,uid);
+                int formDayInt = today-chooseDay*CommonConstant.ONE_DAY_INT;
+                int toDayInt = today -(chooseDay-1)*CommonConstant.ONE_DAY_INT;
+                infos = tdb.selectTripPoint(formDayInt,toDayInt,uid);
+                chooseDayInt = formDayInt;
             }
         }
         return infos;
@@ -385,7 +399,7 @@ public class EditActivity extends AppCompatActivity implements
             updateMapView(mLines);
             return;
         }
-        MyDialog dialog = MyDialog.chooseReasonDialog(context, new MyDialog.ChooseCallBack() {
+        MyDialog dialog = MyDialog.chooseWayDialog(context, new MyDialog.ChooseCallBack() {
             @Override
             public void choose(int position) {
                 myMarker.getTripPointInfo().setWay(position);
@@ -419,7 +433,7 @@ public class EditActivity extends AppCompatActivity implements
                         uploadDialog.dismiss();
                         TUtil.TLong(R.string.update_success);
                         HistoryListDB db = new HistoryListDB(MyApplication.getInstance().getApplicationContext());
-                        db.instertHistory(MyApplication.getInstance().getUserInfo().getEmail(), DateConvertUtil.DateTodayInt());
+                        db.instertHistory(MyApplication.getInstance().getUserInfo().getEmail(), chooseDayInt);
                     }
                 });
     }

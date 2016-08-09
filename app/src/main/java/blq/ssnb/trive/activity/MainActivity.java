@@ -55,6 +55,7 @@ import blq.ssnb.trive.db.TripPointDB;
 import blq.ssnb.trive.db.json.AllTripToJson;
 import blq.ssnb.trive.http.okhttp.OkHttpUtils;
 import blq.ssnb.trive.http.okhttp.callback.StringCallback;
+import blq.ssnb.trive.http.okhttp.utils.L;
 import blq.ssnb.trive.model.MyMarker;
 import blq.ssnb.trive.model.TripPointInfo;
 import blq.ssnb.trive.service.RecordCallBackHandler;
@@ -330,11 +331,16 @@ public class MainActivity extends AppCompatActivity
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(info.getAddress());
                 markerOptions.title("stop"+MarkIndex);
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(MarkIndex * 360 / tripPointInfos.size()));
+                markerOptions.icon(
+                        BitmapDescriptorFactory
+                                .defaultMarker(
+                                        (MarkIndex%14)*360/14
+                                )
+                );
                 MarkIndex++;
                 markerOptions.snippet(DateConvertUtil.MM_dd_HH_mm(info.getStamp()*1000L));
                 Marker mMarker = googleMap.addMarker(markerOptions);
-
+                L.e("Draw:Mid="+mMarker.getId());
                 MyMarker myMarker = new MyMarker();
                 myMarker.setMarkerTag(mMarker.getId());
                 myMarker.setTripPointInfo(info);
@@ -434,7 +440,7 @@ public class MainActivity extends AppCompatActivity
                 tdb.updateReson(myMarker.getTripPointInfo().getPid(),position);
             }
         });
-        dialog.setIndex(myMarker.getTripPointInfo().getWay());
+        dialog.setIndex(myMarker.getTripPointInfo().getReason());
         dialog.show();
     }
     private void saveWay(){
@@ -444,7 +450,7 @@ public class MainActivity extends AppCompatActivity
             updateMapView(mLines);
             return;
         }
-        MyDialog dialog = MyDialog.chooseReasonDialog(context, new MyDialog.ChooseCallBack() {
+        MyDialog dialog = MyDialog.chooseWayDialog(context, new MyDialog.ChooseCallBack() {
             @Override
             public void choose(int position) {
                 myMarker.getTripPointInfo().setWay(position);

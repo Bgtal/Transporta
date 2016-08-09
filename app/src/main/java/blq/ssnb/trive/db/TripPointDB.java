@@ -118,14 +118,14 @@ public class TripPointDB {
 		String sql = " UPDATE "+DbConstant.TABLE_NAME_TRIPPOINTS+" SET "
 				+DbConstant.TRIPPOINT_FIEID_REASON+" =? "
 				+" WHERE " + DbConstant.TRIPPOINT_FIEID_ID + " =? ";
-		db.execSQL(sql,new Object[]{pid,reason});
+		db.execSQL(sql,new Object[]{reason,pid});
 	}
 	public void updateWay(int pid,int way){
 		db = dbHelper.getWritableDatabase();
 		String sql = " UPDATE "+DbConstant.TABLE_NAME_TRIPPOINTS+" SET "
 				+DbConstant.TRIPPOINT_FIEID_WAY+" =? "
 				+" WHERE " + DbConstant.TRIPPOINT_FIEID_ID + " =? ";
-		db.execSQL(sql,new Object[]{pid,way});
+		db.execSQL(sql,new Object[]{way,pid});
 	}
 
 	//-----------------------删除---------------------

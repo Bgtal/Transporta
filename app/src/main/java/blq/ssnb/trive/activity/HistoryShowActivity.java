@@ -9,6 +9,7 @@ import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -85,10 +86,15 @@ public class HistoryShowActivity extends FragmentActivity implements
 				}else{
 					MarkerOptions mark = new MarkerOptions();
 					mark.position(tripPointInfo.getAddress());
-					mark.title(""+i);
-					i++;
+					mark.title("stop"+i);
 					mark.snippet(DateConvertUtil.yyyy_MM_dd_HH_mm_ss(tripPointInfo.getStamp()*1000l));
-					
+					mark.icon(
+							BitmapDescriptorFactory
+									.defaultMarker(
+											(i%14)*360/14
+									)
+					);
+					i++;
 					MarkList.add(mark);
 					lineList.add(tripPointInfo.getAddress());
 					mGoogleMap.addMarker(mark);
@@ -107,7 +113,7 @@ public class HistoryShowActivity extends FragmentActivity implements
 
 	private void openInfo(TripPointInfo info){
 		if(showStopInfoScrollView.getVisibility()==View.GONE){
-			showStopInfoScrollView.setVisibility(View.VISIBLE);			
+			showStopInfoScrollView.setVisibility(View.VISIBLE);
 		}
 		resonView.setText(CommonConstant.RESON[info.getReason()]);
 		wayView.setText(CommonConstant.WAY[info.getWay()]);
@@ -120,10 +126,10 @@ public class HistoryShowActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onMarkerClick(Marker mark) {
-		
+
 		TripPointInfo info = MarkTripInfo.get(Integer.parseInt(mark.getTitle()));
 		openInfo(info);
-		
+
 		return false;
 	}
 
