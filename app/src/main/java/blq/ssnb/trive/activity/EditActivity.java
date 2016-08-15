@@ -164,7 +164,9 @@ public class EditActivity extends AppCompatActivity implements
                     uploadDialog.show();
                     HashMap<String, String> map = new HashMap<>();
                     AllTripToJson js = new AllTripToJson(context);
-                    map.put("TRIPINFO", js.allTripInfoToJSON(MyApplication.getInstance().getUserInfo().getEmail()).toString());
+                    map.put("TRIPINFO", js.allTripInfoToJsonByTime(
+                            MyApplication.getInstance().getUserInfo().getEmail(),
+                            chooseDayInt).toString());
                     map.put("PERSID", MyApplication.getInstance().getUserInfo().getEmail());
                     map.put("ACTTDATE", chooseDayInt+ "");
                     uploadTravel(map);

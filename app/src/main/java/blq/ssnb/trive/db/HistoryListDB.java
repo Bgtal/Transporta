@@ -21,7 +21,7 @@ public class HistoryListDB {
 	}
 
 	public List<Integer> getHistoryList(String userID){
-		ArrayList<Integer> recordDate = new ArrayList<Integer>();
+		ArrayList<Integer> recordDate = new ArrayList<>();
 		db =dbHelper.getReadableDatabase();
 		String sql = "select * from "
 				+DbConstant.TABLE_NAME_HISTORY
@@ -34,8 +34,8 @@ public class HistoryListDB {
 			recordDate.add(
 					cursor.getInt(
 							cursor.getColumnIndex(DbConstant.HISTORY_FIEID_DATE)
-							)
-					);
+					)
+			);
 		}
 		cursor.close();
 		db.close();
@@ -52,6 +52,8 @@ public class HistoryListDB {
 					+" values(?,?)";
 			db.execSQL(sql, new Object[]{date,userID});
 			db.close();
+		}else{
+			updateHistory(userID, date);
 		}
 	}
 
@@ -71,16 +73,14 @@ public class HistoryListDB {
 		db.close();
 		return yes;
 	}
-	
+
 	public void updateHistory(String userID ,int date){
-		if(!haveData(userID, date)){
-			db = dbHelper.getWritableDatabase();
-			String sql = "UPDATE " + DbConstant.TABLE_NAME_HISTORY+" SET "
-					+DbConstant.HISTORY_FIEID_UPDATE + " =?"
-					+" where "+DbConstant.HISTORY_FIEID_USERID + " =? and "
-					+DbConstant.HISTORY_FIEID_DATE +" =?";
-			db.execSQL(sql, new Object[]{userID,date});
-			db.close();
-		}
+		db = dbHelper.getWritableDatabase();
+		String sql = "UPDATE " + DbConstant.TABLE_NAME_HISTORY+" SET "
+				+DbConstant.HISTORY_FIEID_UPDATE + " =?"
+				+" where "+DbConstant.HISTORY_FIEID_USERID + " =? and "
+				+DbConstant.HISTORY_FIEID_DATE +" =?";
+		db.execSQL(sql, new Object[]{userID,date});
+		db.close();
 	}
 }

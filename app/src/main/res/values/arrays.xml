@@ -133,4 +133,23 @@
         <item>To be out of the region (NFD)</item>
     </string-array>
 
+    <string-array name="way">
+        <item>NULL</item>
+        <item>Car as driver</item>
+        <item>Car as passenger</item>
+        <item>Motorbike</item>
+        <item>Truck as driver</item>
+        <item>Truck as passenger</item>
+        <item>Other private vehicle</item>
+        <item>Walk</item>
+        <item>Bicycle</item>
+        <item>Taxi</item>
+        <item>Train</item>
+        <item>Ferry</item>
+        <item>School Bus</item>
+        <item>Transperth Bus</item>
+        <item>Other Bus</item>
+        <item>Other method</item>
+    </string-array>
+
 </resources>

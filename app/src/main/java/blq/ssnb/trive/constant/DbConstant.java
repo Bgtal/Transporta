@@ -32,8 +32,8 @@ public class DbConstant {
 			"CREATE TABLE IF NOT EXISTS "+
 					TABLE_NAME_USER+
 					" ( "+USER_FIEID_EMAIL+" varchar(256) NOT NULL , "+
-					USER_FIEID_GENDER+" tinyint(4) NOT NULL, "+
-					USER_FIEID_RESIDENT+" tinyint(4) NOT NULL, "+
+					USER_FIEID_GENDER+" int(11) NOT NULL, "+
+					USER_FIEID_RESIDENT+" int(11) NOT NULL, "+
 					USER_FIEID_AGE+" int(11) NOT NULL, "+
 					USER_FIEID_OTHER +" varchar(256) NOT NULL, "+
 					USER_FIEID_DRIVER_LICENCE+" int(11) NOT NULL, "+

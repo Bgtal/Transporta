@@ -24,9 +24,11 @@ public class MyDialog extends Dialog{
         void onClick();
     }
     public interface ChooseCallBack{
-       void choose(int position);
+        void choose(int position);
     }
 
+    private String[] arrayReson;
+    private String[] arrayWay;
     private Context context;
     private TextView textView;
     private String title;
@@ -45,10 +47,23 @@ public class MyDialog extends Dialog{
 
 
     public static MyDialog chooseReasonDialog(Context context ,ChooseCallBack callback){
-        return new MyDialog(context,"Why did you stop here?", CommonConstant.RESON,null,null,callback);
+        return new MyDialog(
+                context,
+                "Why did you stop here?",
+                context.getResources().getStringArray(R.array.reson),
+                null,
+                null,
+                callback
+        );
     }
     public static MyDialog chooseWayDialog(Context context ,ChooseCallBack callback){
-        return new MyDialog(context,"How did you get here?", CommonConstant.WAY,null,null,callback);
+        return new MyDialog(
+                context,
+                "How did you get here?",
+                context.getResources().getStringArray(R.array.way),
+                null,
+                null,
+                callback);
     }
     public MyDialog(Context context,
                     String title,

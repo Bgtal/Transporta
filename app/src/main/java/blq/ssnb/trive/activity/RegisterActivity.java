@@ -32,7 +32,6 @@ import blq.ssnb.trive.model.UserModel;
 import blq.ssnb.trive.service.RecordingService;
 import blq.ssnb.trive.util.MLog;
 import blq.ssnb.trive.util.PreferenceUtil;
-import blq.ssnb.trive.util.RegularUtil;
 import blq.ssnb.trive.util.ServiceUtil;
 import blq.ssnb.trive.util.TUtil;
 import okhttp3.Call;
@@ -158,11 +157,6 @@ public class RegisterActivity extends AppCompatActivity {
         residentRadioBtn.setChecked(true);
         ((RadioButton) waLayout.findViewById(R.id.gradio_btn_last)).setText(R.string.visitor);
 
-        //birth
-//        LinearLayout birthLayout = (LinearLayout) findViewById(R.id.country_of_birth);
-//        ((TextView)birthLayout.findViewById(R.id.register_title)).setText("Country of birth:");
-//        birthSpinner = (Spinner) birthLayout.findViewById(R.id.register_spinner);
-
         //driver's licence
         LinearLayout dirverLayout = (LinearLayout) findViewById(R.id.dirver);
         ((TextView)dirverLayout.findViewById(R.id.register_title)).setText("Driver's Licence:");
@@ -215,7 +209,6 @@ public class RegisterActivity extends AppCompatActivity {
     void updateView() {
 
         bindAdapter(ageSpinner,ageStrings);
-//        bindAdapter(birthSpinner,birthStrings);
         bindAdapter(driverSpinner,driverStrings);
         bindAdapter(employmentSpinner,employmentStrings);
         bindAdapter(studyingSpinner,studyingStrings);
@@ -229,7 +222,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private <T>void bindAdapter(Spinner spinner,T[] arrayStrings){
 
-        ArrayAdapter<T> _Adapter=new ArrayAdapter<T>(this,android.R.layout.simple_spinner_item, arrayStrings);
+        ArrayAdapter<T> _Adapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, arrayStrings);
         spinner.setAdapter(_Adapter);
     }
 
@@ -268,19 +261,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
- /*       birthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                registerUser.setBirth_country(birthStrings[position]);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });*/
         driverSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -396,7 +376,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                registerUser.setGender(isChecked?0:1);
+                registerUser.setResident(isChecked?0:1);
             }
         });
     }

@@ -38,7 +38,8 @@ public class HistoryShowActivity extends FragmentActivity implements
 	private List<MarkerOptions> MarkList = new ArrayList<MarkerOptions>();
 	private List<TripPointInfo> MarkTripInfo = new ArrayList<TripPointInfo>();
 
-
+	private String[] arrayWay ;
+	private String[] arrayReson ;
 	private ScrollView showStopInfoScrollView;
 	private TextView resonView;
 	private TextView wayView;
@@ -55,7 +56,13 @@ public class HistoryShowActivity extends FragmentActivity implements
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.history_show_map);
 		mapFragment.getMapAsync(this);
+		initData();
 		InitView();
+	}
+
+	private void initData() {
+		arrayWay = getResources().getStringArray(R.array.way);
+		arrayReson = getResources().getStringArray(R.array.reson);
 	}
 
 	private void InitView() {
@@ -86,7 +93,7 @@ public class HistoryShowActivity extends FragmentActivity implements
 				}else{
 					MarkerOptions mark = new MarkerOptions();
 					mark.position(tripPointInfo.getAddress());
-					mark.title("stop"+i);
+					mark.title(""+i);
 					mark.snippet(DateConvertUtil.yyyy_MM_dd_HH_mm_ss(tripPointInfo.getStamp()*1000l));
 					mark.icon(
 							BitmapDescriptorFactory
@@ -115,8 +122,8 @@ public class HistoryShowActivity extends FragmentActivity implements
 		if(showStopInfoScrollView.getVisibility()==View.GONE){
 			showStopInfoScrollView.setVisibility(View.VISIBLE);
 		}
-		resonView.setText(CommonConstant.RESON[info.getReason()]);
-		wayView.setText(CommonConstant.WAY[info.getWay()]);
+		resonView.setText(arrayReson[info.getReason()]);
+		wayView.setText(arrayWay[info.getWay()]);
 	}
 	private void closeInfo(){
 		if(showStopInfoScrollView.getVisibility()==View.VISIBLE){
