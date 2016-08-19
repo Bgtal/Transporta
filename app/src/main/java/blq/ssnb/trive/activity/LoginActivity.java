@@ -12,6 +12,8 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.nio.charset.IllegalCharsetNameException;
+
 import blq.ssnb.trive.R;
 import blq.ssnb.trive.R.string;
 import blq.ssnb.trive.app.AppManager;

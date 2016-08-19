@@ -62,7 +62,7 @@ public class HistoryShowActivity extends FragmentActivity implements
 
 	private void initData() {
 		arrayWay = getResources().getStringArray(R.array.way);
-		arrayReson = getResources().getStringArray(R.array.reson);
+		arrayReson = getResources().getStringArray(R.array.reason);
 	}
 
 	private void InitView() {

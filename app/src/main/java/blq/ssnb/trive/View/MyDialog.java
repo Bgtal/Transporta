@@ -50,7 +50,7 @@ public class MyDialog extends Dialog{
         return new MyDialog(
                 context,
                 "Why did you stop here?",
-                context.getResources().getStringArray(R.array.reson),
+                context.getResources().getStringArray(R.array.reason),
                 null,
                 null,
                 callback

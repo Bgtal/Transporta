@@ -49,6 +49,7 @@ import blq.ssnb.trive.app.MyApplication;
 import blq.ssnb.trive.constant.CommonConstant;
 import blq.ssnb.trive.constant.HttpConstant;
 import blq.ssnb.trive.constant.PlistConstant;
+import blq.ssnb.trive.constant.ServiceConstant;
 import blq.ssnb.trive.constant.SetConstant;
 import blq.ssnb.trive.db.HistoryListDB;
 import blq.ssnb.trive.db.TripPointDB;
@@ -64,6 +65,7 @@ import blq.ssnb.trive.service.RecordingService;
 import blq.ssnb.trive.util.DateConvertUtil;
 import blq.ssnb.trive.util.DialogUtil;
 import blq.ssnb.trive.util.NotificationUtil;
+import blq.ssnb.trive.util.ServiceUtil;
 import blq.ssnb.trive.util.TUtil;
 import okhttp3.Call;
 
@@ -535,11 +537,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        if(ServiceUtil.isServiceRunning(this, ServiceConstant.SERVICE_NAME_RECORD)) {
+            unbindService(conn);
+        }
         googleMap = null;
         markerHashMap = null;
         mLines = null;
         conn = null;
+        super.onDestroy();
     }
 
 }

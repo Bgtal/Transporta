@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.tencent.bugly.crashreport.CrashReport;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
@@ -59,6 +61,7 @@ public class MyApplication extends MultiDexApplication {
         super.onCreate();
         mApplication = this;
         initOkHttp();
+        CrashReport.initCrashReport(getApplicationContext(), "900048604", false);
     }
 
     public synchronized void setUserInfo(UserModel userModel){
