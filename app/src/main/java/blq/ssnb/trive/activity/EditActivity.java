@@ -160,7 +160,7 @@ public class EditActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 if(haveData){
-                    uploadDialog = DialogUtil.LoginDialog(EditActivity.this);
+                    uploadDialog = DialogUtil.upLoadDialog(EditActivity.this);
                     uploadDialog.show();
                     HashMap<String, String> map = new HashMap<>();
                     AllTripToJson js = new AllTripToJson(context);

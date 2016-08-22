@@ -1,5 +1,6 @@
 package blq.ssnb.trive.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import blq.ssnb.trive.http.okhttp.OkHttpUtils;
 import blq.ssnb.trive.http.okhttp.callback.StringCallback;
 import blq.ssnb.trive.model.UserModel;
 import blq.ssnb.trive.service.RecordingService;
+import blq.ssnb.trive.util.DialogUtil;
 import blq.ssnb.trive.util.MLog;
 import blq.ssnb.trive.util.PreferenceUtil;
 import blq.ssnb.trive.util.ServiceUtil;
@@ -411,11 +413,16 @@ public class RegisterActivity extends AppCompatActivity {
 //            TUtil.TLong(R.string.email_address_error);
 //        }
     }
+
+    Dialog dialog ;
     /**
      * 请求注册
      */
     private void httpRegister(){
-
+        if(dialog==null){
+            dialog = DialogUtil.getYanzhenDialog(this);
+        }
+        dialog.show();
         OkHttpUtils
                 .post()
                 .url(HttpConstant.REGISTER)
@@ -440,7 +447,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if(key){
                                 registerSuccess();
                             }else{
-
+                                dialog.dismiss();
                                 TUtil.TLong(jsonObject.getString("msg"));
                                 preferenceUtil.saveBoolean(PlistConstant.AUTO_LOGIN_ISAUTO, false);
                             }
@@ -453,6 +460,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerSuccess() {
+        dialog.dismiss();
         TUtil.TLong(R.string.register_success);
         preferenceUtil.saveBoolean(PlistConstant.AUTO_LOGIN_ISAUTO, true);
         preferenceUtil.saveString(PlistConstant.AUTO_LOGIN_EMAIL, registerUser.getEmail());
@@ -469,6 +477,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerFail(){
+        dialog.dismiss();
         TUtil.TLong(R.string.register_fail);
         preferenceUtil.saveBoolean(PlistConstant.AUTO_LOGIN_ISAUTO, false);
     }

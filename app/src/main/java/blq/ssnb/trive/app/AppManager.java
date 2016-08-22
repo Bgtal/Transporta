@@ -53,10 +53,10 @@ public class AppManager {
     /**
      * 结束指定类名的Activity
      */
-    public static void finishActivity(Class<?> cls) {
-        for (Activity activity : activityStack) {
-            if (activity.getClass().equals(cls)) {
-                finishActivity(activity);
+    public static synchronized void finishActivity(Class<?> cls) {
+        for(int i = activityStack.size()-1;i>=0;i--){
+            if(activityStack.get(i).getClass().equals(cls)){
+                finishActivity(activityStack.get(i));
             }
         }
     }

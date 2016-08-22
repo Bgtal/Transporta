@@ -9,14 +9,9 @@
     <string name="notification_update">Please fill in today\'s itinerary and send it to us.</string>
     <string name="login_out_time">Sorry，Login timeout</string>
     <string name="net_error_tip">No network connection</string>
-    <string name="first_start_dialog_text">Landing on ……</string>
+    <string name="first_start_dialog_text">Login on ……</string>
     <string name="yanzhen_dialog">Waiting…</string>
     <string name="explain_btn_getinto">进入应用</string>
-    <string name="release_notes">1.history只有在更新后才会显示，不更新就不显示 \n
-	    2.更新中没有提示，只有在一定时间后会弹出成功或失败，所以请不要多次点击更新按钮 \n
-	    3.因未提供注册和登陆选项所以是以默认账号显示用户数据的
-	    4.实验发现在建筑物内、地下会导致定位不准确，从而导致错误的定位判断。且由于在后台可能会导致信息的丢失，但是app在前台运行的时候可以观察到明显的记录\n
-	    5.其他界面相关问题，需要讨论后决定</string>
     <string name="loading">Loading…</string>
     <string name="google_service_connection_fail">Unable to connect to Google server</string>
     <string name="google_service_connectioning">Connecting Google server</string>

@@ -94,6 +94,21 @@
         <item>Other pensioner</item>
     </string-array>
     <string-array name="reason">
+        <item>To get on or off a bus, train or ferry</item>
+        <item>To pick up or deliver something</item>
+        <item>To pick up or drop off someone</item>
+        <item>To accompany someone</item>
+        <item>To eat or drink</item>
+        <item>To go shopping/buy something</item>
+        <item>For education</item>
+        <item>For work purposes</item>
+        <item>To go home</item>
+        <item>To visit someone</item>
+        <item>Other reason</item>
+    </string-array>
+
+
+    <string-array name="reason_old">
         <item>NULL</item>
         <item>Got on or off PT</item>
         <item>Something picked-up or delivered </item>

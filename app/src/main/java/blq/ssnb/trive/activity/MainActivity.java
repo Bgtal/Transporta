@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadDialog = DialogUtil.LoginDialog(MainActivity.this);
+                uploadDialog = DialogUtil.upLoadDialog(MainActivity.this);
                 uploadDialog.show();
                 HashMap<String, String> map = new HashMap<>();
                 AllTripToJson js = new AllTripToJson(context);
