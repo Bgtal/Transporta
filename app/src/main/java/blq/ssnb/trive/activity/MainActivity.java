@@ -468,7 +468,6 @@ public class MainActivity extends AppCompatActivity
      * @param map 带上传的数据格式
      */
     private void uploadTravel(HashMap<String, String> map) {
-
         OkHttpUtils
                 .post()
                 .url(HttpConstant.UPDATE)

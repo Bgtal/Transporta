@@ -3,8 +3,11 @@ package blq.ssnb.trive.activity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+import android.view.View;
 
 import blq.ssnb.trive.R;
 import blq.ssnb.trive.R.string;
@@ -18,6 +21,8 @@ import blq.ssnb.trive.http.okhttp.OkHttpUtils;
 import blq.ssnb.trive.http.okhttp.callback.StringCallback;
 import blq.ssnb.trive.model.UserModel;
 import blq.ssnb.trive.service.RecordingService;
+import blq.ssnb.trive.util.MLog;
+import blq.ssnb.trive.util.NotificationUtil;
 import blq.ssnb.trive.util.PreferenceUtil;
 import blq.ssnb.trive.util.ServiceUtil;
 import blq.ssnb.trive.util.TUtil;
@@ -44,12 +49,6 @@ public class StartActivity extends BaseActivity {
 	}
 	@Override
 	void bindEvent() {
-
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
 
 	}
 

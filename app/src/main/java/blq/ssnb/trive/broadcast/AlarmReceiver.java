@@ -27,11 +27,11 @@ public class AlarmReceiver extends BroadcastReceiver {
 			AlarmUtil.setUpConfig(context);
 		}
 		//24点时候更新
-		if(intent.getAction().equals(AlarmObject.UPDATECONFIG.getAction())){
+//		if(intent.getAction().equals(AlarmObject.UPDATECONFIG.getAction())){
 			//pz.save(Common.UPDATE_OK, true);//update_ok变false
-			NotificationUtil.cancle(context,NotificationType.Update);
+//			NotificationUtil.cancle(context,NotificationType.Update);
 
-		}
+//		}
 	}
 
 }
