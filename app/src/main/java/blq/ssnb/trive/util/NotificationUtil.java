@@ -13,6 +13,7 @@ import blq.ssnb.trive.R;
 import blq.ssnb.trive.activity.MainActivity;
 import blq.ssnb.trive.app.MyApplication;
 import blq.ssnb.trive.constant.CommonConstant;
+import blq.ssnb.trive.constant.PlistConstant;
 
 public class NotificationUtil {
 
@@ -30,40 +31,35 @@ public class NotificationUtil {
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	public static void Update(Context context){
-		long time = System.currentTimeMillis();
-
-		if(time<=(DateConvertUtil.DateTodayLong()+20*CommonConstant.ONE_HOUR_LONG)){
+		if(System.currentTimeMillis()<=(DateConvertUtil.DateTodayLong()+20*CommonConstant.ONE_HOUR_LONG)){
 			//如果当前时间小于更新时间久不弹出
 			return ;
 		}
 
+		PreferenceUtil pf = new PreferenceUtil(context, PlistConstant.FILE_NAME_AUTO_LOGIN);
+		if(!pf.readBoolean(PlistConstant.AUTO_LOGIN_ISAUTO)){
+			return;
+		}
 		/*if(pzInfo.readBoolean(Common.UPDATE_OK)){
 		 	//如果显示已经更新过了，那么就不用显示了
 			return ;
 		}*/
-
-		int icon = R.drawable.ic_launcher_2;
+		if(MyApplication.getInstance().getUserInfo()==null){
+			return;
+		}
 		CharSequence tickerText = context.getResources().getString(R.string.notification_update);
-
-		RemoteViews remoteView = new RemoteViews(context.getPackageName(),
-				R.layout.notify_status_bar_latest_event_view);
-
-		remoteView.setImageViewResource(R.id.icon, icon);
-		remoteView.setTextViewText(R.id.title, "ssnb");//MyApplication.getInstance().getUserInfo().getEmail());//这里需要注意下换成相应的文字
-		remoteView.setTextViewText(R.id.text, tickerText);
-		remoteView.setLong(R.id.time, "setTime", time);
-
 		Intent intent = new Intent(context,MainActivity.class);
 		PendingIntent pending = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 		Notification notification = new Notification.Builder(context)
+				.setSmallIcon(R.drawable.ic_launcher_2)
+				.setContentTitle(MyApplication.getInstance().getUserInfo().getEmail())
+				.setContentText(tickerText)
 				.setTicker(tickerText)
-				.setSmallIcon(icon)
 				.setAutoCancel(true)
-				.setContent(remoteView)
-				.setWhen(time)
 				.setAutoCancel(true)
 				.setOngoing(true)
+				.setStyle(new Notification.BigTextStyle().bigText(tickerText))
 				.setDefaults(Notification.DEFAULT_ALL)
 				.setContentIntent(pending)
 				.build();

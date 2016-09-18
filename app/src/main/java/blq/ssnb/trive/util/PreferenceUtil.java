@@ -85,6 +85,9 @@ public class PreferenceUtil {
 		editor.putBoolean(key, value);
 		editor.commit();
 	}
+	public boolean readBoolean(String key,boolean value){
+		return sharedPreferences.getBoolean(key,value);
+	}
 
 	/**
 	 * 读取保存的参数，

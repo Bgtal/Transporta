@@ -62,9 +62,11 @@ import blq.ssnb.trive.model.TripPointInfo;
 import blq.ssnb.trive.service.RecordCallBackHandler;
 import blq.ssnb.trive.service.RecordManager;
 import blq.ssnb.trive.service.RecordingService;
+import blq.ssnb.trive.util.AlarmUtil;
 import blq.ssnb.trive.util.DateConvertUtil;
 import blq.ssnb.trive.util.DialogUtil;
 import blq.ssnb.trive.util.NotificationUtil;
+import blq.ssnb.trive.util.PreferenceUtil;
 import blq.ssnb.trive.util.ServiceUtil;
 import blq.ssnb.trive.util.TUtil;
 import okhttp3.Call;
@@ -123,6 +125,11 @@ public class MainActivity extends AppCompatActivity
                 drawTravel();
             }
         };
+        PreferenceUtil pf = new PreferenceUtil(context,PlistConstant.FILE_NAME_BOOLEAN);
+        if(pf.readBoolean(PlistConstant.BOOLEAN_ISFIST,true)){
+            AlarmUtil.setUpdat(context);
+            pf.saveBoolean(PlistConstant.BOOLEAN_ISFIST,false);
+        }
     }
 
 

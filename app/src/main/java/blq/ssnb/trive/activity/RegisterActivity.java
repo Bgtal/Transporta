@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         TextView titleView = (TextView) findViewById(R.id.nv_title);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         assert titleView != null;
-        titleView.setText("Register");
+        titleView.setText(R.string.register_title);
     }
     private Context context;
 
@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
     private RadioButton manRadioBtn;//男
 
     private Spinner ageSpinner;//年龄
-    private Integer[] ageStrings;//年龄选项
+    private String[] ageStrings;//年龄选项
 
     private RadioButton residentRadioBtn;//本地人
 
@@ -122,7 +122,8 @@ public class RegisterActivity extends AppCompatActivity {
         AppManager.addActivity(this);
         preferenceUtil = new PreferenceUtil(context, PlistConstant.FILE_NAME_AUTO_LOGIN);
         registerUser= new UserModel();
-        ageStrings = CommonConstant.getAges();
+//        ageStrings = CommonConstant.getAges();
+        ageStrings = getResources().getStringArray(R.array.age);
 //        birthStrings = getResources().getStringArray(R.array.birth_array);
         driverStrings = getResources().getStringArray(R.array.driver_array);
         employmentStrings = getResources().getStringArray(R.array.employment_array);
@@ -255,7 +256,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                registerUser.setAge(ageStrings[position]);
+                registerUser.setAge(position);
             }
 
             @Override

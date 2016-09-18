@@ -74,4 +74,10 @@ public class PlistConstant {
 	 */
 	public static final String FILE_NAME_APP_CONFIGURE="appConfigure";
 
+	/**
+	 * 用于判断是否是第一次
+	 */
+
+	public static final String FILE_NAME_BOOLEAN ="isTrue";
+	public static final String BOOLEAN_ISFIST = "fistStart";
 }

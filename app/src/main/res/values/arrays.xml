@@ -167,4 +167,22 @@
         <item>Other method</item>
     </string-array>
 
+    <string-array name="age">
+        <item>19 and under</item>
+        <item>20 to 24</item>
+        <item>25 to 29</item>
+        <item>30 to 34</item>
+        <item>35 to 39</item>
+        <item>40 to 44</item>
+        <item>45 to 49</item>
+        <item>50 to 54</item>
+        <item>55 to 59</item>
+        <item>60 to 64</item>
+        <item>65 to 69</item>
+        <item>70 to 74</item>
+        <item>75 to 79</item>
+        <item>80 to 84</item>
+        <item>85 and over</item>
+    </string-array>
+
 </resources>
